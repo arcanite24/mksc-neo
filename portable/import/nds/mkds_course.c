@@ -810,7 +810,7 @@ static int platform_under(const Course *c, const int32_t at[3])
  * gap (cannons launch at any speed; moving platforms bridge gaps). */
 static int runway_at(Course *c, const MkdsKcl *kcl, int32_t x, int32_t z, int32_t near, int32_t *height)
 {
-    uint8_t surface;
+    uint8_t surface = 0;
     const int found = floor_at(kcl, x, z, near, height, &surface);
     if (found && surface != SURFACE_OUT_OF_BOUNDS && *height > near - 2 * MAP_METRE && *height < near + 2 * MAP_METRE)
         return surface != SURFACE_JUMP;

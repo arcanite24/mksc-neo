@@ -37,6 +37,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef M_PI /* Strict C11 headers (glibc, MSVC) omit it. */
+#define M_PI 3.14159265358979323846
+#endif
+
 typedef struct
 {
     uint32_t id;

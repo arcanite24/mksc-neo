@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+#ifndef M_PI /* Strict C11 headers (glibc, MSVC) omit it. */
+#define M_PI 3.14159265358979323846
+#endif
 #define CHECK(x)                                                                                   \
     do                                                                                             \
     {                                                                                              \
