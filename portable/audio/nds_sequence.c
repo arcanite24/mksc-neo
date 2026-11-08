@@ -459,7 +459,7 @@ static int variable_command(PortableNdsPlayer *p, PortableNdsTrack *t, uint8_t c
     case 0xb4: if (value) *v = (int16_t)(*v / value); break;
     case 0xb5: *v = (int16_t)(value >= 0 ? *v << (value & 15) : *v >> (-value & 15)); break;
     case 0xb6:
-        *v = (int16_t)(value >= 0 ? next_random(p) % (uint32_t)(value + 1)
+        *v = (int16_t)(value >= 0 ? (int32_t)(next_random(p) % (uint32_t)(value + 1))
                                   : -(int32_t)(next_random(p) % (uint32_t)(-value + 1)));
         break;
     case 0xb8: t->compare = *v == value; break;

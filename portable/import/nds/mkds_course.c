@@ -562,7 +562,7 @@ static void collision(Course *c, Gameplay *g)
         engine_point(c, t->vertex[0], corners[0]);
         engine_point(c, t->vertex[2], corners[1]);
         engine_point(c, t->vertex[1], corners[2]);
-        collision_triangle(c, g, corners, surface, kcl_surfaces[type].type == SURFACE_WALL, MKDS_ABSENT);
+        collision_triangle(c, g, (const int32_t (*)[3])corners, surface, kcl_surfaces[type].type == SURFACE_WALL, MKDS_ABSENT);
     }
     /* Moving MapObj faces, already wound outward in engine space, owned by
      * their OBJS row. All are road: a face turns from floor to wall as the
@@ -584,7 +584,7 @@ static void collision(Course *c, Gameplay *g)
         int32_t normal[3];
         if (!portable_fixed_3d_normalize(cross, normal))
             continue;
-        collision_triangle(c, g, corners, kcl_surface(c, g, &surfaces, MKDS_KCL_ROAD, 0), 0,
+        collision_triangle(c, g, (const int32_t (*)[3])corners, kcl_surface(c, g, &surfaces, MKDS_KCL_ROAD, 0), 0,
                            ri_le32(faces + face * 40 + 36));
     }
     const uint8_t *walls = c->solid_walls->data;
@@ -593,7 +593,7 @@ static void collision(Course *c, Gameplay *g)
         int32_t corners[3][3];
         for (unsigned k = 0; k < 9; ++k)
             corners[k / 3][k % 3] = (int32_t)ri_le32(walls + face * 36 + k * 4);
-        collision_triangle(c, g, corners, kcl_surface(c, g, &surfaces, MKDS_KCL_WALL, 0), 1, MKDS_ABSENT);
+        collision_triangle(c, g, (const int32_t (*)[3])corners, kcl_surface(c, g, &surfaces, MKDS_KCL_WALL, 0), 1, MKDS_ABSENT);
     }
     if (c->m.tables[MKDS_T_COLT].count == 0)
         ri_fail(c->m.ctx, "%s: course_collision.kcl has no drivable collision", c->m.where);

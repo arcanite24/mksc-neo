@@ -204,7 +204,7 @@ static void platform_tabs(MmCtx *x, float dx, float dy)
 {
     const PortableFrontendFlow *flow = x->flow;
     const uint8_t pages = portable_frontend_flow_driver_pages(flow);
-    uint8_t seen[PORTABLE_FRONTEND_DRIVER_PAGES];
+    uint8_t seen[PORTABLE_FRONTEND_DRIVER_PAGES] = {0};
     unsigned count = 0u;
     for (uint8_t page = 0u; page < pages && count < PORTABLE_FRONTEND_DRIVER_PAGES; ++page)
     {

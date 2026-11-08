@@ -190,7 +190,8 @@ int course_editor_host_event(CourseEditorHost *h,const SDL_Event *e,void *window
     }
     if(e->type==SDL_EVENT_MOUSE_WHEEL && !h->lobby){h->scale+=e->wheel.y;
         if(h->scale<3)h->scale=3;
-        if(h->scale>24)h->scale=24;return 1;}
+        if(h->scale>24)h->scale=24;
+        return 1;}
     if(e->type!=SDL_EVENT_MOUSE_MOTION && e->type!=SDL_EVENT_MOUSE_BUTTON_DOWN)return 0;
     int w=1,v=1;SDL_GetWindowSize(window,&w,&v);
     float mx=e->type==SDL_EVENT_MOUSE_MOTION?e->motion.x:e->button.x;

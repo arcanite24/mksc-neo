@@ -936,7 +936,8 @@ int portable_mods_select_assets(PortableModSet *mods,const PortableAssetPackView
     for(unsigned kind=0;kind<PORTABLE_ASSET_SOURCE_COUNT;++kind)
         if(!memchr(sources[kind],0,PORTABLE_MOD_ID_CAPACITY)||
            (sources[kind][0]&&strcmp(sources[kind],"@base")&&!portable_mod_id_valid(sources[kind]))){
-            if(error&&capacity)snprintf(error,capacity,"Invalid asset source ID");return 0;
+            if(error&&capacity)snprintf(error,capacity,"Invalid asset source ID");
+            return 0;
         }
     if(!sources[0][0]&&!sources[1][0]&&!sources[2][0])return 1;
     const PortableAssetPackView *bases[]={base_2d,base_3d};

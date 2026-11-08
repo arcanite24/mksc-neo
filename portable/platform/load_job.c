@@ -28,7 +28,10 @@ int portable_load_start(PortableLoadJob *job, PortableLoadWork work, void *user)
      * worker gets a main-thread-sized 8 MiB stack. */
     const SDL_PropertiesID props = SDL_CreateProperties();
     if (props) {
-        SDL_SetPointerProperty(props, SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER, (void *)load_worker);
+        /* SDL takes the entry function as a pointer property; ISO C has no
+         * direct function-to-object pointer conversion. */
+        union { SDL_ThreadFunction function; void *pointer; } entry = {.function = load_worker};
+        SDL_SetPointerProperty(props, SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER, entry.pointer);
         SDL_SetStringProperty(props, SDL_PROP_THREAD_CREATE_NAME_STRING, "content-load");
         SDL_SetPointerProperty(props, SDL_PROP_THREAD_CREATE_USERDATA_POINTER, job);
         SDL_SetNumberProperty(props, SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER, 8 * 1024 * 1024);

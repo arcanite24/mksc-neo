@@ -1720,7 +1720,7 @@ static VehicleRoute *path_route(Placer *p,const int32_t (*path)[3],uint32_t leng
 static void chomp_family(Placer *p,const Mk64Chomps *c,const int32_t (*race)[3],uint32_t race_count)
 {
     MkdsModel *course=p->course;RiCtx *ctx=course->ctx;
-    if (!race || race_count<c->first+c->spacing*c->count)ri_fail(ctx,"%s: Chain Chomps need race path 0",course->where);
+    if (!race || race_count<(uint32_t)c->first+(uint32_t)c->spacing*c->count)ri_fail(ctx,"%s: Chain Chomps need race path 0",course->where);
     const uint32_t mesh=armature_loop(p,"Chain Chomp",c->skeleton,c->animations,0,FRAME_TICKS,1,NULL);
     const int32_t (*path)[3]=(const int32_t (*)[3])reversed_path(ctx,race,race_count,mk64_metres(c->height));
     VehicleRoute *r=path_route(p,path,race_count,c->speed);
