@@ -49,7 +49,7 @@ SHARED_TILES = range(0xE0, 0x100)   # ROM tiles shared by every course
 ALIAS_TILES = range(0xD0, 0xE0)     # runtime object tile aliases
 SHARED_COLOURS = range(48, 64)
 
-# Documented material names (driver_material.c / ARCHITECTURE.md).
+# Material names (see driver_material.c).
 MATERIALS = {
     'road': 0x40, 'offroad': 0x5A, 'wall': 0x80, 'boost': 0x16,
     'jump': 0x10, 'small_jump': 0x12, 'bump': 0x1E, 'pit': 0x20,

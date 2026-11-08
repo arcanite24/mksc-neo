@@ -35,9 +35,9 @@ python3 tools/portable/check.py debug --sdl   # also build the SDL game
 
 Also rendered at <https://arcanite24.github.io/mksc-neo/>.
 
-- [docs/BUILDING.md](docs/BUILDING.md) — build, test, import, package and run.
-- [docs/MODDING.md](docs/MODDING.md) — install mods; make Lua, data and track mods; API reference.
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — how the engine is structured.
+- [docs/BUILDING.md](docs/BUILDING.md) — build, test, run, controls, releases, Android and web.
+- [docs/MODDING.md](docs/MODDING.md) — install and make mods: Lua, data, tracks, 3D courses and models.
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — how the engine is put together.
 
 ## Layout
 

@@ -198,7 +198,7 @@ def configure_and_build(build, prefix, platform):
     build_command = ['cmake', '--build', build, '--config', 'Release', '--target', 'mksc',
                      '--parallel', '4']
     if platform == 'windows':
-        build_command.append('--clean-first')  # see docs/BUILDING.md (MSVC header deps)
+        build_command.append('--clean-first')  # MSVC builds can miss header dependencies
     run(build_command)
     return find_one(build, ['mksc.exe', 'mksc', 'Release/mksc.exe'], 'built mksc')
 
