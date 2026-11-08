@@ -181,6 +181,7 @@ class WebPackageTests(unittest.TestCase):
         (build / 'mksc.html').write_text('<!doctype html><title>Engine</title>')
         (build / 'mksc.js').write_text('var Module = {};\n')
         (build / 'mksc.wasm').write_bytes(b'\0asm\1\0\0\0')
+        (build / 'sw.js').write_text('self.addEventListener("fetch", () => {});\n')
         prefix = root / 'sdl'
         prefix.mkdir()
         (prefix / 'LICENSE.txt').write_text('Authored SDL license fixture\n')
@@ -218,8 +219,8 @@ class WebPackageTests(unittest.TestCase):
                                      (build / name).read_bytes())
                 readme = bundle.read('mksc-neo-test-web-wasm32/README.txt').decode()
                 self.assertIn('http.server 8000 --bind 127.0.0.1', readme)
-                self.assertIn('temporary', readme)
-                self.assertIn('Choose your game.pack', readme)
+                self.assertIn('choose your ROM', readme)
+                self.assertIn('offline', readme)
             self.assertEqual(check_bundle(archive, None), ([], len(expected)))
 
     def test_missing_web_runtime_rejects_before_staging(self):
