@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MKSC Neo</title>
+<style>
+  :root { color-scheme: dark; font: 16px system-ui; background: #141414; color: #eee; }
+  body { margin: 0; min-height: 100vh; display: grid; place-content: center; text-align: center; }
+  main { max-width: 960px; padding: 16px; }
+  canvas { display: block; width: min(90vw,960px); height: auto; background: #000; image-rendering: pixelated; }
+  button,input { font: inherit; margin: 8px; }
+  #status { min-height: 1.5em; }
+</style>
+<main>
+  <h1>MKSC Neo</h1>
+  <div id="launcher">
+    <p>Choose your imported game.pack to play. Game content stays on your device.</p>
+    <input id="pack" type="file" accept=".pack" aria-label="Game pack">
+    <button id="play" disabled>Play</button>
+  </div>
+  <p id="status" role="status">Loading game…</p>
+  <canvas id="canvas" width="720" height="480" tabindex="0" aria-label="Game"></canvas>
+  <p>Arrow keys: steer · Z: confirm/accelerate · X: back/brake · Shift: hop · C: item · Enter: Start</p>
+  <p>Saves in this browser session are temporary. Reload to choose another pack.</p>
+</main>
+<script>
+  const status = document.getElementById('status');
+  const play = document.getElementById('play');
+  const pack = document.getElementById('pack');
+  const canvas = document.getElementById('canvas');
+  let ready = false, busy = false;
+  var Module = {
+    canvas,
+    noInitialRun: true,
+    onRuntimeInitialized() { ready = true; status.textContent = 'Choose a game pack.'; play.disabled = !pack.files.length; },
+    print(text) { console.log(text); },
+    printErr(text) { console.error(text); },
+    onAbort(text) { status.textContent = 'Game stopped: ' + text; }
+  };
+  pack.addEventListener('change', () => { play.disabled = busy || !ready || !pack.files.length; });
+  play.addEventListener('click', async () => {
+    if (busy || !ready || !pack.files.length) return;
+    busy = true;
+    const selected = pack.files[0];
+    pack.disabled = true;
+    play.disabled = true;
+    status.textContent = 'Opening game pack…';
+    try {
+      Module.FS.writeFile('/game.pack', new Uint8Array(await selected.arrayBuffer()));
+      canvas.focus();
+      const result = Module.callMain(['/game.pack']);
+      if (result) throw new Error('game pack rejected (' + result + '); see browser console');
+      document.getElementById('launcher').hidden = true;
+      status.textContent = '';
+    } catch (error) {
+      status.textContent = 'Could not start: ' + error;
+      busy = false;
+      pack.disabled = false;
+      play.disabled = false;
+    }
+  });
+  canvas.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+{{{ SCRIPT }}}
+</html>

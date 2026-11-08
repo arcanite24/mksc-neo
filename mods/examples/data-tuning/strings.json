@@ -1,0 +1,36 @@
+{
+  "strings": [
+    {
+      "id": 88,
+      "value": "SETUP"
+    },
+    {
+      "id": 25,
+      "value": "DUEL"
+    },
+    {
+      "id": 93,
+      "value": "HOLD"
+    },
+    {
+      "id": 85,
+      "value": "DIRT"
+    },
+    {
+      "id": 97,
+      "value": "RUN RESULTS"
+    },
+    {
+      "id": 27,
+      "value": "DUEL RESULTS"
+    },
+    {
+      "id": 129,
+      "value": "TIME RECORDS"
+    },
+    {
+      "id": 99,
+      "value": "R TO RETRY"
+    }
+  ]
+}

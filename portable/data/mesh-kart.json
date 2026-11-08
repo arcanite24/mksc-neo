@@ -1,0 +1,277 @@
+{
+  "version": 2,
+  "profile_id": 1,
+  "revision": 10,
+  "ranges": {
+    "weight_low": [
+      327680,
+      3276800
+    ],
+    "weight_high": [
+      327680,
+      6553600
+    ],
+    "weight_boost": [
+      1310720,
+      6553600
+    ],
+    "acceleration_limit": [
+      458752,
+      1572864
+    ],
+    "acceleration_rate": [
+      393,
+      1049
+    ],
+    "traction_on": [
+      49152,
+      49152
+    ],
+    "traction_off": [
+      59965,
+      56033
+    ],
+    "charge_1": [
+      18350080,
+      13107200
+    ],
+    "charge_2": [
+      38666240,
+      28180480
+    ],
+    "charge_3": [
+      58982400,
+      43253760
+    ],
+    "mt1_ticks": [
+      1376256,
+      2621440
+    ],
+    "mt1_cap": [
+      69140,
+      75366
+    ],
+    "mt1_acceleration": [
+      1717043,
+      1599078
+    ],
+    "mt2_ticks": [
+      4718592,
+      7208960
+    ],
+    "mt2_cap": [
+      69140,
+      75366
+    ],
+    "mt2_acceleration": [
+      1592525,
+      1474560
+    ],
+    "trick_ticks": [
+      1048576,
+      2293760
+    ],
+    "trick_cap": [
+      85524,
+      91750
+    ],
+    "trick_acceleration": [
+      2693530,
+      2464154
+    ],
+    "speed_ground": [
+      1474560,
+      1682091
+    ],
+    "speed_water": [
+      1441792,
+      1605632
+    ],
+    "speed_air": [
+      1409024,
+      1572864
+    ],
+    "speed_antigravity": [
+      1507328,
+      1671168
+    ],
+    "handling_ground_normal": [
+      1311,
+      1966
+    ],
+    "handling_ground_drift": [
+      1638,
+      2294
+    ],
+    "handling_ground_charge": [
+      98304,
+      39322
+    ],
+    "handling_water_normal": [
+      1311,
+      1966
+    ],
+    "handling_water_drift": [
+      1638,
+      2294
+    ],
+    "handling_water_charge": [
+      98304,
+      39322
+    ],
+    "handling_air_normal": [
+      1311,
+      1966
+    ],
+    "handling_air_drift": [
+      1638,
+      2294
+    ],
+    "handling_air_charge": [
+      98304,
+      39322
+    ],
+    "handling_antigravity_normal": [
+      1311,
+      1966
+    ],
+    "handling_antigravity_drift": [
+      1638,
+      2294
+    ],
+    "handling_antigravity_charge": [
+      98304,
+      39322
+    ]
+  },
+  "base_levels_q16": {
+    "weight": 589824,
+    "acceleration": 589824,
+    "traction_on": 589824,
+    "traction_off": 589824,
+    "mini_turbo": 589824,
+    "speed_ground": 589824,
+    "speed_water": 589824,
+    "speed_air": 589824,
+    "speed_antigravity": 589824,
+    "handling_ground": 589824,
+    "handling_water": 589824,
+    "handling_air": 589824,
+    "handling_antigravity": 589824
+  },
+  "driver_points_q16": {
+    "1": {},
+    "2": {},
+    "3": {
+      "weight": -262144,
+      "acceleration": 196608,
+      "mini_turbo": 131072,
+      "traction_off": 65536,
+      "speed_ground": -131072,
+      "handling_ground": 131072,
+      "speed_water": -131072,
+      "handling_water": 131072,
+      "speed_air": -131072,
+      "handling_air": 131072,
+      "speed_antigravity": -131072,
+      "handling_antigravity": 131072
+    },
+    "4": {
+      "weight": -262144,
+      "acceleration": 196608,
+      "mini_turbo": 131072,
+      "traction_off": 65536,
+      "speed_ground": -131072,
+      "handling_ground": 131072,
+      "speed_water": -131072,
+      "handling_water": 131072,
+      "speed_air": -131072,
+      "handling_air": 131072,
+      "speed_antigravity": -131072,
+      "handling_antigravity": 131072
+    },
+    "5": {
+      "weight": -131072,
+      "acceleration": 131072,
+      "mini_turbo": 65536,
+      "speed_ground": -65536,
+      "handling_ground": 65536,
+      "speed_water": -65536,
+      "handling_water": 65536,
+      "speed_air": -65536,
+      "handling_air": 65536,
+      "speed_antigravity": -65536,
+      "handling_antigravity": 65536
+    },
+    "6": {
+      "weight": 196608,
+      "acceleration": -131072,
+      "mini_turbo": -65536,
+      "speed_ground": 131072,
+      "handling_ground": -65536,
+      "speed_water": 131072,
+      "handling_water": -65536,
+      "speed_air": 131072,
+      "handling_air": -65536,
+      "speed_antigravity": 131072,
+      "handling_antigravity": -65536
+    },
+    "7": {
+      "weight": 196608,
+      "acceleration": -131072,
+      "mini_turbo": -65536,
+      "speed_ground": 131072,
+      "handling_ground": -65536,
+      "speed_water": 131072,
+      "handling_water": -65536,
+      "speed_air": 131072,
+      "handling_air": -65536,
+      "speed_antigravity": 131072,
+      "handling_antigravity": -65536
+    },
+    "8": {
+      "weight": 327680,
+      "acceleration": -196608,
+      "mini_turbo": -131072,
+      "traction_off": -65536,
+      "speed_ground": 196608,
+      "handling_ground": -131072,
+      "speed_water": 196608,
+      "handling_water": -131072,
+      "speed_air": 196608,
+      "handling_air": -131072,
+      "speed_antigravity": 196608,
+      "handling_antigravity": -131072
+    }
+  },
+  "class_speed_ratio_q16": [
+    52429,
+    58982,
+    65536
+  ],
+  "cpu_speed_ratio_q16": [
+    49152,
+    60293,
+    65536
+  ],
+  "handling_response_q16": 655360,
+  "drift_response_q16": 524288,
+  "minimum_drift_speed_ratio_q16": 32768,
+  "outside_drift_angle_q16": 5461,
+  "outside_drift_recovery_q16": 524288,
+  "air_steering_ratio_q16": 16384,
+  "normal_alignment_response_q16": 786432,
+  "panel_boost_ticks": 60,
+  "panel_cap_ratio_q16": 78643,
+  "panel_acceleration_q16": 4305715,
+  "hop_velocity_q16": 226617,
+  "terminal_fall_speed_q16": 2359296,
+  "ground_snap_q16": 655,
+  "ground_probe_q16": 6554,
+  "kart_radius_q16": 32768,
+  "ride_height_q16": 22938,
+  "ground_normal_cutoff_q30": 536870912,
+  "respawn_ticks": 60,
+  "respawn_grace_ticks": 60,
+  "respawn_lift_q16": 65536
+}

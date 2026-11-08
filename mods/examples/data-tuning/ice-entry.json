@@ -1,0 +1,38 @@
+{
+  "cups": [
+    {
+      "catalog": 1,
+      "cup": 0,
+      "courses": [
+        36,
+        25,
+        29,
+        27
+      ]
+    },
+    {
+      "catalog": 1,
+      "cup": 3,
+      "courses": [
+        24,
+        34,
+        30,
+        35
+      ]
+    }
+  ],
+  "kart_physics": [
+    {
+      "id": 1,
+      "time_trial": {
+        "base_speed_q16": 33554432
+      },
+      "engines": [
+        {
+          "id": 0,
+          "base_speed_q16": 33554432
+        }
+      ]
+    }
+  ]
+}

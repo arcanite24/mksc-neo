@@ -1,0 +1,9 @@
+{
+  "id": "custom-cup",
+  "name": "Neo Cup: four painted tracks",
+  "version": "1.0.0",
+  "api_version": 1,
+  "pack": "content.pack",
+  "depends": [],
+  "load_after": []
+}

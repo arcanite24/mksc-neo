@@ -1,0 +1,52 @@
+{
+  "mushroom_rules": {"id":1,"boost_ticks":75,"single_actor_ticks":12,"golden_actor_ticks":120,"acceleration_units":40,"max_speed_q16":117440512},
+  "gp_rules": {"id":1,"retry_credits":0},
+  "kart_physics": [{"id":1,"time_trial":{"base_speed_q16":78643200},"engines":[{"id":2,"base_speed_q16":78643200}]}],
+  "engine_speed_percent": {"150": 105},
+  "battle_items": [
+    [{"item":4098,"weight":9},{"item":4105,"weight":1}],
+    [{"item":4098,"weight":9},{"item":4105,"weight":1}],
+    [{"item":4098,"weight":9},{"item":4105,"weight":1}]
+  ],
+  "cups": [{"catalog":1,"cup":0,"courses":[27,29,25,24]}],
+  "cpu_items": [
+    {"course":27,"engine":2,"variant":0,"driver_class":0,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":1,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":2,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":3,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":4,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":5,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":6,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":0,"driver_class":7,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":0,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":1,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":2,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":3,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":4,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":5,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":6,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":1,"driver_class":7,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":0,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":1,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":2,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":3,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":4,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":5,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":6,"items":[4103,4103,4103,4103,4103,4103,4103,4103]},
+    {"course":27,"engine":2,"variant":2,"driver_class":7,"items":[4103,4103,4103,4103,4103,4103,4103,4103]}
+  ],
+  "gp_points": {"id":1,"awards":[18,12,6,2,0,0,0,0]},
+  "gp_items": [
+    {"id":1,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":2,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":3,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":4,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":5,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":6,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":7,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":8,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":9,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":10,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]},
+    {"id":11,"weights":[{"item":4103,"weight":9},{"item":4105,"weight":1}]}
+  ]
+}

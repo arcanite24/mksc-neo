@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "courses": [
+    {
+      "course_id": 36,
+      "source_sha256": "63bbc0b321553528a1247d7e374b61f8fc61a4bc978323b8b6fc9b8d75f2a47c",
+      "metres_per_source_unit": 0.1,
+      "height_guide": {
+        "scene": "36-elevation.glb",
+        "node": "Elevation"
+      }
+    },
+    {
+      "course_id": 34,
+      "source_sha256": "9ee02540f0c4c15476c7cbb82fc704f2bff6ece373c5c0f4b703c7984ba0c281",
+      "metres_per_source_unit": 0.1,
+      "height_guide": {
+        "scene": "34-elevation.glb",
+        "node": "Elevation"
+      }
+    },
+    {
+      "course_id": 30,
+      "source_sha256": "13a935515e84c4fdfda5636f263d15ca930a7374ae02959e8558cf90f371ac39",
+      "metres_per_source_unit": 0.1,
+      "height_guide": {
+        "scene": "30-elevation.glb",
+        "node": "Elevation"
+      }
+    },
+    {
+      "course_id": 35,
+      "source_sha256": "d95445fe89bf33b8bca1b764ec1c0c57083571ae5a881dc808ae44987fcb562a",
+      "metres_per_source_unit": 0.1,
+      "height_guide": {
+        "scene": "35-elevation.glb",
+        "node": "Elevation"
+      }
+    }
+  ]
+}

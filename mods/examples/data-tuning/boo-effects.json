@@ -1,0 +1,543 @@
+{
+  "boo_rules": {
+    "id": 1,
+    "invisibility_ticks": 90,
+    "lock_ticks": 60,
+    "orbit_ticks": 16,
+    "orbit_step": 3072,
+    "bob_step": 2048,
+    "repel_velocity_q16": 65536,
+    "repel_gravity_q16": 16384
+  },
+  "battle_items": [
+    [
+      {
+        "item": 4107,
+        "weight": 1
+      },
+      {
+        "item": 4096,
+        "weight": 3
+      },
+      {
+        "item": 4106,
+        "weight": 1
+      }
+    ],
+    [
+      {
+        "item": 4107,
+        "weight": 1
+      },
+      {
+        "item": 4096,
+        "weight": 3
+      },
+      {
+        "item": 4106,
+        "weight": 1
+      }
+    ],
+    [
+      {
+        "item": 4107,
+        "weight": 1
+      },
+      {
+        "item": 4096,
+        "weight": 3
+      },
+      {
+        "item": 4106,
+        "weight": 1
+      }
+    ]
+  ],
+  "gp_items": [
+    {
+      "id": 1,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "weights": [
+        {
+          "item": 4107,
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "cpu_items": [
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 0,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 1,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 2,
+      "items": [
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 3,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 4,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 5,
+      "items": [
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 6,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 7,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 0,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 1,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 2,
+      "items": [
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 3,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 4,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 5,
+      "items": [
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 6,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 7,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 0,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 1,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 2,
+      "items": [
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 3,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 4,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 5,
+      "items": [
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106,
+        4106
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 6,
+      "items": [
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107,
+        4107
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 7,
+      "items": [
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096,
+        4096
+      ]
+    }
+  ]
+}

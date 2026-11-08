@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "profile_id": 1296302081,
+  "revision": 2,
+  "charge_ticks": [
+    30,
+    90,
+    180
+  ],
+  "boost_ticks": [
+    20,
+    40,
+    60
+  ],
+  "cap_ratio_256": [
+    288,
+    304,
+    320
+  ],
+  "minimum_speed_ratio_256": 128,
+  "acceleration_q16": [
+    196608,
+    262144,
+    327680
+  ],
+  "air": {
+    "minimum_air_ticks": 2,
+    "trick_window_ticks": 45,
+    "boost_ticks": 30,
+    "cap_ratio_256": 304,
+    "acceleration_q16": 262144,
+    "minimum_speed_ratio_256": 128,
+    "launch_mask": 3
+  }
+}

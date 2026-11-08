@@ -1,0 +1,59 @@
+name: Native portable checks
+
+# Deliberately manual: publishing and selecting runners require owner action.
+on:
+  workflow_dispatch:
+    inputs:
+      macos_runner:
+        description: 'macOS runner labels as JSON, with at least 50 GB free'
+        required: true
+        type: string
+      linux_runner:
+        description: 'Linux runner labels as JSON, with at least 50 GB free'
+        required: true
+        type: string
+      windows_runner:
+        description: 'Windows runner labels as JSON, with at least 50 GB free'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  unix:
+    name: ${{ matrix.platform }} native checks
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macOS
+            runner: ${{ inputs.macos_runner }}
+          - platform: Linux
+            runner: ${{ inputs.linux_runner }}
+    runs-on: ${{ fromJSON(matrix.runner) }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Debug, release and ASan/UBSan (ROM-free)
+        run: python3 tools/portable/check.py all
+
+  windows:
+    name: Windows MSVC native checks
+    runs-on: ${{ fromJSON(inputs.windows_runner) }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Debug and release (ROM-free)
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+          if errorlevel 1 exit /b %errorlevel%
+          set CMAKE_GENERATOR=Ninja
+          python tools/portable/check.py debug
+          if errorlevel 1 exit /b %errorlevel%
+          python tools/portable/check.py release

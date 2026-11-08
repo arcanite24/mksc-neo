@@ -1,0 +1,533 @@
+{
+  "battle_items": [
+    [
+      {
+        "item": 4101,
+        "weight": 3
+      },
+      {
+        "item": 4096,
+        "weight": 1
+      }
+    ],
+    [
+      {
+        "item": 4101,
+        "weight": 3
+      },
+      {
+        "item": 4096,
+        "weight": 1
+      }
+    ],
+    [
+      {
+        "item": 4101,
+        "weight": 3
+      },
+      {
+        "item": 4096,
+        "weight": 1
+      }
+    ]
+  ],
+  "gp_items": [
+    {
+      "id": 1,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "weights": [
+        {
+          "item": 4101,
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "cpu_items": [
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 0,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 1,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 2,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 3,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 4,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 5,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 6,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 7,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 0,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 1,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 2,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 3,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 4,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 5,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 6,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 7,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 0,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 1,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 2,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 3,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 4,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 5,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 6,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 7,
+      "items": [
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101,
+        4101
+      ]
+    }
+  ],
+  "banana_rules": {
+    "id": 1,
+    "throw_speed_q16": 262144,
+    "cpu_flight_ticks": 24,
+    "throw_velocity_q16": 155648,
+    "throw_gravity_q16": 12288,
+    "collision_grace_ticks": 4,
+    "release_lock_ticks": 8,
+    "cpu_hold_ticks": 60,
+    "destruction_velocity_q16": 65536,
+    "destruction_gravity_q16": 16384
+  }
+}

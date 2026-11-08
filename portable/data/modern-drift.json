@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "profile_id": 1296302081,
+  "revision": 1,
+  "charge_ticks": [30, 90, 180],
+  "boost_ticks": [20, 40, 60],
+  "cap_ratio_256": [288, 304, 320],
+  "minimum_speed_ratio_256": 128,
+  "acceleration_q16": [196608, 262144, 327680]
+}

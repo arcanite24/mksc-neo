@@ -1,0 +1,39 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+
+# Operator-owned ROMs, saves, and generated binaries
+*.gba
+*.nds
+*.rom
+*.sav
+*.elf
+*.o
+*.a
+*.map
+
+# Local ROMs and game workspaces
+workspace/
+
+# Local AI agent settings
+.claude/
+.codex/
+AGENTS.md
+CLAUDE.md
+
+# Local packages and logs
+*.zip
+*.zip.sha256
+*.log
+
+# Local analysis, backups and build evidence intermediates
+.mksc-tools/
+.reva/
+
+# Emulator savestates and screenshots (game-derived; never commit)
+*.ss[0-9]
+*.sav

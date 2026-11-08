@@ -1,0 +1,8 @@
+{
+  "cups": [
+    {"catalog":1,"cup":0,"courses":[32,25,29,27]},
+    {"catalog":1,"cup":1,"courses":[24,37,38,31]},
+    {"catalog":2,"cup":0,"courses":[68,65,66,67]},
+    {"catalog":2,"cup":1,"courses":[64,69,70,71]}
+  ]
+}

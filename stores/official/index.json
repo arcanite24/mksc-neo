@@ -1,0 +1,52 @@
+{
+  "format_version": 1,
+  "id": "official",
+  "name": "MKSC Neo examples",
+  "mods": [
+    {
+      "id": "lap-bonus",
+      "name": "Final Lap Mushroom",
+      "author": "MKSC Neo contributors",
+      "version": "1.0.0",
+      "description": "Receive a mushroom on the final lap.",
+      "download_url": "builtin://lap-bonus",
+      "sha256": "23b9e9dd2e7a706a47f172b0566f8c26f18d716bc715b97daa190c8a9c660c1d",
+      "size": 1061,
+      "license": "LicenseRef-Repository-Notice",
+      "compatible_game_versions": [
+        "1"
+      ],
+      "screenshots": []
+    },
+    {
+      "id": "lucky-start",
+      "name": "Lucky Start",
+      "author": "MKSC Neo contributors",
+      "version": "1.0.0",
+      "description": "Draw a reproducible starting item in races; Time Trial only announces the draw.",
+      "download_url": "builtin://lucky-start",
+      "sha256": "271d1573578716fc091d088c302d0e3c6029ac5497bfadd850a0cfcdf57b74e8",
+      "size": 1937,
+      "license": "LicenseRef-Repository-Notice",
+      "compatible_game_versions": [
+        "1"
+      ],
+      "screenshots": []
+    },
+    {
+      "id": "item-swap",
+      "name": "Banana Swap",
+      "author": "MKSC Neo contributors",
+      "version": "1.0.0",
+      "description": "Throw single green shells as bananas; refuse spiny shell use.",
+      "download_url": "builtin://item-swap",
+      "sha256": "801747a1597dd0347d70176795827604a513ced1f6f58c7e1c4ff81b68082828",
+      "size": 1147,
+      "license": "LicenseRef-Repository-Notice",
+      "compatible_game_versions": [
+        "1"
+      ],
+      "screenshots": []
+    }
+  ]
+}

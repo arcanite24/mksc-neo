@@ -1,0 +1,8 @@
+{
+  "id": 129, "name": "NEO KIDNEY", "template": 26, "corner_radius": 256, "road_material": "road",
+  "surfaces": {"road": ["road", "0x4c"], "offroad": ["offroad", "0x56"]},
+  "start_x": 400, "finish_y": 1024,
+  "points": [[400, 1600], [400, 500], [700, 250], [1300, 300], [1650, 600], [1400, 1000],
+             [1650, 1400], [1300, 1750], [700, 1800]],
+  "item_boxes": [0.25, 0.6], "coins": [0.15, 0.4, 0.75, 0.9]
+}

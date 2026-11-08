@@ -1,0 +1,584 @@
+{
+  "battle_items": [
+    [
+      {
+        "item": 4098,
+        "weight": 1
+      },
+      {
+        "item": 4099,
+        "weight": 1
+      },
+      {
+        "item": 4100,
+        "weight": 1
+      }
+    ],
+    [
+      {
+        "item": 4098,
+        "weight": 1
+      },
+      {
+        "item": 4099,
+        "weight": 1
+      },
+      {
+        "item": 4100,
+        "weight": 1
+      }
+    ],
+    [
+      {
+        "item": 4098,
+        "weight": 1
+      },
+      {
+        "item": 4099,
+        "weight": 1
+      },
+      {
+        "item": 4100,
+        "weight": 1
+      }
+    ]
+  ],
+  "gp_items": [
+    {
+      "id": 1,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "weights": [
+        {
+          "item": 4100,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "weights": [
+        {
+          "item": 4100,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "weights": [
+        {
+          "item": 4100,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "weights": [
+        {
+          "item": 4098,
+          "weight": 1
+        },
+        {
+          "item": 4099,
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "cpu_items": [
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 0,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 1,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 2,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 3,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 4,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 5,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 6,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 0,
+      "driver_class": 7,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 0,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 1,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 2,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 3,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 4,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 5,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 6,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 1,
+      "driver_class": 7,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 0,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 1,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 2,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 3,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 4,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 5,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 6,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    },
+    {
+      "course": 24,
+      "engine": 0,
+      "variant": 2,
+      "driver_class": 7,
+      "items": [
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100,
+        4098,
+        4100
+      ]
+    }
+  ],
+  "red_shell_rules": {
+    "id": 1,
+    "launch_speed_bonus": 384,
+    "max_launch_speed": 60,
+    "collision_grace_ticks": 4,
+    "route_budget": 6,
+    "release_lock_ticks": 8,
+    "cpu_hold_ticks": 60,
+    "flight_speed_50": 80,
+    "flight_speed_100": 90,
+    "flight_speed_150": 100,
+    "acceleration": 8,
+    "deceleration": 24,
+    "trap_arm_ticks": 24,
+    "trap_lifetime_ticks": 180,
+    "trap_lock_ticks": 10,
+    "destruction_velocity_q16": 98304,
+    "destruction_gravity_q16": 12288
+  }
+}

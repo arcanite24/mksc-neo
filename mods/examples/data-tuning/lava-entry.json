@@ -1,0 +1,6 @@
+{
+  "cups": [
+    {"catalog": 1, "cup": 0, "courses": [31, 25, 29, 27]},
+    {"catalog": 1, "cup": 1, "courses": [32, 37, 38, 24]}
+  ]
+}

@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+
+// SDL 3.4.18 source tree: -PsdlSource=PATH or the SDL3_SOURCE_DIR environment variable.
+def sdlSource = project.findProperty('sdlSource') ?: System.getenv('SDL3_SOURCE_DIR')
+if (sdlSource == null) throw new GradleException('Set -PsdlSource=PATH to the SDL 3.4.18 source tree')
+sdlSource = file(sdlSource).absolutePath
+def scratch = rootProject.file('../../.mksc-tools/portable/check/android')
+
+android {
+    namespace = 'io.github.mkscneo'
+    compileSdk = 35
+    ndkVersion = project.findProperty('ndkVersion') ?: '27.1.12297006'
+    defaultConfig {
+        applicationId = 'io.github.mkscneo'
+        minSdk = 26
+        targetSdk = 35
+        versionCode = 1
+        versionName = '0.1'
+        externalNativeBuild {
+            cmake {
+                arguments "-DMKSC_SDL_SOURCE=${sdlSource}", '-DANDROID_STL=c++_static', '-DPORTABLE_STRICT_WARNINGS=ON'
+                abiFilters 'arm64-v8a'
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            // The game is too slow unoptimized; keep symbols for debugging.
+            externalNativeBuild { cmake { arguments '-DCMAKE_BUILD_TYPE=RelWithDebInfo' } }
+        }
+        release {
+            minifyEnabled = false
+            signingConfig = signingConfigs.debug
+        }
+    }
+    sourceSets.main.java.srcDirs += "${sdlSource}/android-project/app/src/main/java"
+    externalNativeBuild {
+        cmake {
+            path = 'CMakeLists.txt'
+            version = '3.22.1'
+            buildStagingDirectory = new File(scratch, 'cxx')
+        }
+    }
+    lint {
+        abortOnError = false
+    }
+}

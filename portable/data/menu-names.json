@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "note": "Display names for the modern menus, by driver and course content ID and by menu cup (0-4 GBA, 5-9 Extra, 10 Battle). Unlisted content shows its pack name art. Driver speed/weight are 1-5 stat bars.",
+  "drivers": [
+    {"id": 1, "name": "Mario", "speed": 3, "weight": 3}, {"id": 2, "name": "Luigi", "speed": 3, "weight": 3}, {"id": 3, "name": "Peach", "speed": 5, "weight": 1},
+    {"id": 4, "name": "Toad", "speed": 5, "weight": 1}, {"id": 5, "name": "Yoshi", "speed": 4, "weight": 2}, {"id": 6, "name": "Donkey Kong", "speed": 2, "weight": 4},
+    {"id": 7, "name": "Wario", "speed": 2, "weight": 4}, {"id": 8, "name": "Bowser", "speed": 1, "weight": 5}
+  ],
+  "cups": [
+    {"cup": 0, "name": "Mushroom Cup"}, {"cup": 1, "name": "Flower Cup"},
+    {"cup": 2, "name": "Lightning Cup"}, {"cup": 3, "name": "Star Cup"},
+    {"cup": 4, "name": "Special Cup"},
+    {"cup": 5, "name": "Extra Mushroom Cup"}, {"cup": 6, "name": "Extra Flower Cup"},
+    {"cup": 7, "name": "Extra Lightning Cup"}, {"cup": 8, "name": "Extra Star Cup"},
+    {"cup": 9, "name": "Extra Special Cup"}, {"cup": 10, "name": "Battle Courses"}
+  ],
+  "courses": [
+    {"id": 24, "name": "Peach Circuit"}, {"id": 25, "name": "Shy Guy Beach"},
+    {"id": 29, "name": "Riverside Park"}, {"id": 27, "name": "Bowser Castle 1"},
+    {"id": 32, "name": "Mario Circuit"}, {"id": 37, "name": "Boo Lake"},
+    {"id": 38, "name": "Cheese Land"}, {"id": 31, "name": "Bowser Castle 2"},
+    {"id": 28, "name": "Luigi Circuit"}, {"id": 40, "name": "Sky Garden"},
+    {"id": 33, "name": "Cheep-Cheep Island"}, {"id": 26, "name": "Sunset Wilds"},
+    {"id": 36, "name": "Snow Land"}, {"id": 34, "name": "Ribbon Road"},
+    {"id": 30, "name": "Yoshi Desert"}, {"id": 35, "name": "Bowser Castle 3"},
+    {"id": 43, "name": "Lakeside Park"}, {"id": 41, "name": "Broken Pier"},
+    {"id": 42, "name": "Bowser Castle 4"}, {"id": 39, "name": "Rainbow Road"},
+    {"id": 64, "name": "SNES Mario Circuit 1"}, {"id": 65, "name": "SNES Donut Plains 1"},
+    {"id": 66, "name": "SNES Ghost Valley 1"}, {"id": 67, "name": "SNES Bowser Castle 1"},
+    {"id": 68, "name": "SNES Mario Circuit 2"}, {"id": 69, "name": "SNES Choco Island 1"},
+    {"id": 70, "name": "SNES Ghost Valley 2"}, {"id": 71, "name": "SNES Donut Plains 2"},
+    {"id": 72, "name": "SNES Bowser Castle 2"}, {"id": 73, "name": "SNES Mario Circuit 3"},
+    {"id": 74, "name": "SNES Koopa Beach 1"}, {"id": 75, "name": "SNES Choco Island 2"},
+    {"id": 76, "name": "SNES Vanilla Lake 1"}, {"id": 77, "name": "SNES Bowser Castle 3"},
+    {"id": 78, "name": "SNES Mario Circuit 4"}, {"id": 79, "name": "SNES Donut Plains 3"},
+    {"id": 80, "name": "SNES Koopa Beach 2"}, {"id": 81, "name": "SNES Ghost Valley 3"},
+    {"id": 82, "name": "SNES Vanilla Lake 2"}, {"id": 83, "name": "SNES Rainbow Road"},
+    {"id": 96, "name": "Battle Course 1"}, {"id": 97, "name": "Battle Course 2"},
+    {"id": 98, "name": "Battle Course 3"}, {"id": 99, "name": "Battle Course 4"}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "gp_items": [
+    {"id":1,"weights":[{"item":4104,"weight":1}]},
+    {"id":2,"weights":[{"item":4104,"weight":1}]},
+    {"id":3,"weights":[{"item":4104,"weight":1}]},
+    {"id":4,"weights":[{"item":4104,"weight":1}]},
+    {"id":5,"weights":[{"item":4104,"weight":1}]},
+    {"id":6,"weights":[{"item":4104,"weight":1}]},
+    {"id":7,"weights":[{"item":4104,"weight":1}]},
+    {"id":8,"weights":[{"item":4104,"weight":1}]},
+    {"id":9,"weights":[{"item":4104,"weight":1}]},
+    {"id":10,"weights":[{"item":4104,"weight":1}]},
+    {"id":11,"weights":[{"item":4104,"weight":1}]}
+  ],
+  "battle_items": [
+    [{"item":4104,"weight":1},{"item":4098,"weight":3}],
+    [{"item":4104,"weight":1},{"item":4098,"weight":3}],
+    [{"item":4104,"weight":1},{"item":4098,"weight":3}]
+  ]
+}
