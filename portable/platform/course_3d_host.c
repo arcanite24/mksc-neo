@@ -5409,7 +5409,7 @@ static int place_models(PortableCourse3DHost *host, PortableRenderFrame *frame)
                          host->course.id, object, placement->window_follower, placement->window_route);
                 return 0;
             }
-            if (within == (placement->window == 2u))
+            if (within == (unsigned)(placement->window == 2u))
                 base.hidden_views = 15u;
         }
         if (placement->billboard)

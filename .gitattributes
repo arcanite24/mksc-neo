@@ -1,0 +1,2 @@
+# Store archives and generated payloads hash exact bytes: never convert line endings.
+* text=auto eol=lf

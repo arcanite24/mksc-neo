@@ -7,6 +7,7 @@
 #include "n64_sequence.h"
 #include "sound_set_asset.h"
 #include "fx_set_asset.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -301,7 +302,7 @@ static int real_rom(const char *path)
     if(!rom){fclose(file);return 1;}
     const size_t size=fread(rom,1,MKSC_MK64_ROM_BYTES+1u,file);
     const int read_ok=!ferror(file);fclose(file);
-    MkscRomImportResult result={0};MkscMk64Inventory inventory;char error[512];
+    MkscRomImportResult result={0};MkscMk64Inventory inventory={0};char error[512];
     const int ok=read_ok && mksc_mk64_import(rom,size,NULL,NULL,&result,&inventory,error,sizeof error)==1;
     free(rom);
     if(!ok){fprintf(stderr,"MK64 owner import failed: %s\n",read_ok?error:"read error");return 1;}
@@ -364,7 +365,7 @@ static int real_rom(const char *path)
             portable_course_3d_route_node(&course,route.node_first+n,&a);
             portable_course_3d_route_node(&course,route.node_first+(n+1)%route.node_count,&b);
             double square=0;for(unsigned k=0;k<3;++k){const double d=(b.position_q16[k]-a.position_q16[k])/65536.0;square+=d*d;}
-            length+=__builtin_sqrt(square);if(a.position_q16[2]<low)low=a.position_q16[2];
+            length+=sqrt(square);if(a.position_q16[2]<low)low=a.position_q16[2];
         }
         if(length<stated[i]*0.98 || length>stated[i]*1.02)
             fprintf(stderr,"course %u route %.1f m, stated %u m\n",i,length,(unsigned)stated[i]);

@@ -131,7 +131,7 @@ static void character_tile(MmCtx *x, float px, float py, float size, uint8_t pag
     const PortableFrontendFlow *flow = x->flow;
     UiCanvas *c = x->c;
     const PortableFrontendDriverSlot *driver = portable_frontend_flow_driver_at(flow, page, slot);
-    PortableCharacterSlotArt art;
+    PortableCharacterSlotArt art = {0};
     UiImage emblem;
     const int mesh = (driver != NULL && driver->mesh_only && mm_portrait_3d(x, driver->content_id, &emblem));
     const int has = mesh || portable_character_menu_slot_art(x->view->pack, flow, page, slot, &art);
@@ -305,7 +305,7 @@ int mm_page_character(MmCtx *x)
     }
     /* Showcase: the highlighted driver's kart turning on its pedestal. */
     const PortableFrontendDriverSlot *driver = portable_frontend_flow_driver_at(flow, page, flow->character_cursor);
-    PortableCharacterSlotArt art;
+    PortableCharacterSlotArt art = {0};
     UiImage emblem;
     const int random = flow->character_cursor == PORTABLE_FRONTEND_RANDOM_SLOT;
     const int mesh = (driver != NULL && driver->mesh_only && mm_portrait_3d(x, driver->content_id, &emblem));

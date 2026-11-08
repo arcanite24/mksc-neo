@@ -682,7 +682,7 @@ static int directional_views(void)
         }
         unsigned side = 7;
         CHECK(portable_render_view_art_side(&pane, 0x4000, &side));
-        CHECK(side == ((uint16_t)(0x4000 - camera) > 32767u));
+        CHECK(side == (unsigned)((uint16_t)(0x4000 - camera) > 32767u));
     }
     unsigned side = 7;
     PortableRenderView invalid = {.right = {NAN, 1, 0}};

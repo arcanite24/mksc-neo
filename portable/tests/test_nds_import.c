@@ -343,7 +343,7 @@ static void nkm(Bytes *out, const char *extra_section, int cpat_next)
             put32(out, 2);
             for (int cp = 0; cp < 2; ++cp)
             {
-                put32(out, cp * 400 * 4096), put32(out, -300 * 4096), put32(out, cp * 400 * 4096), put32(out, 300 * 4096);
+                put32(out, cp * 400 * 4096), put32(out, (uint32_t)(-300 * 4096)), put32(out, cp * 400 * 4096), put32(out, 300 * 4096);
                 put32(out, 0), put32(out, 4096), put32(out, 0);
                 put16(out, 0xFFFF), put16(out, cp ? 0xFFFF : 0), put16(out, cp ? 0 : 0xFFFF);
                 put8(out, 0), put8(out, 0);

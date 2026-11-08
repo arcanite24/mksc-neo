@@ -15,7 +15,10 @@ option(PORTABLE_STRICT_WARNINGS "Treat native compiler warnings as errors" OFF)
 option(PORTABLE_SANITIZERS "Enable address and undefined-behavior sanitizers" OFF)
 if(PORTABLE_STRICT_WARNINGS)
     if(MSVC)
-        add_compile_options(/W4 /WX)
+        # Match the GCC/Clang -Wall -Wextra set: implicit numeric conversions
+        # (C4244, C4305), shadowing (C4456, C4457, C4459) and constant
+        # conditions (C4127) are not errors there either.
+        add_compile_options(/W4 /WX /wd4244 /wd4305 /wd4456 /wd4457 /wd4459 /wd4127)
     else()
         add_compile_options(-Wall -Wextra -Wpedantic -Werror)
         if(CMAKE_C_COMPILER_ID STREQUAL "GNU")

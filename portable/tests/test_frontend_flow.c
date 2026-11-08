@@ -1068,9 +1068,9 @@ static int test_platform_lock(void)
     cups[0]=(PortableFrontendMeshCup){"Mushroom Cup",0x4d4b4301u,{11u,12u,13u,14u},{15u,15u,15u,15u},
         {"A","B","C","D"},0u,4u,1u,0u};
     cups[1]=(PortableFrontendMeshCup){"",7u,{65536u},{15u},{"Bridge"},1u,1u,0u,0u};
-    const PortableFrontendConfig config={roster,18u,courses,sizeof courses/sizeof courses[0]};
+    const PortableFrontendConfig platform_config={roster,18u,courses,sizeof courses/sizeof courses[0]};
     PortableFrontendFlow flow;
-    CHECK(portable_frontend_flow_init(&flow,&config)&&
+    CHECK(portable_frontend_flow_init(&flow,&platform_config)&&
           portable_frontend_flow_set_mesh_cups(&flow,cups,2u,groups,platforms,2u));
     CHECK(portable_frontend_flow_page_platform(&flow,0u)==0u&&portable_frontend_flow_page_platform(&flow,1u)==1u);
     CHECK(portable_frontend_flow_platform_group(&flow,1u)==1u&&portable_frontend_flow_platform_group(&flow,2u)==0u);

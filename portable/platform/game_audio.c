@@ -1031,7 +1031,7 @@ static int mesh_audio_engine(RouteAudioHost *audio, const PortableMeshAudioFrame
         state == 1u ? audio->engine_rules.coast_songs[driver] : audio->engine_rules.idle_songs[driver];
     /* A sound set's engine plays on the stock engine's player. */
     const uint8_t player = portable_audio_session_song_player(audio->session.pack, song);
-    uint16_t replaced;
+    uint16_t replaced = 0u;
     const int set_engine = audio->mesh_audio.has_sound_set &&
         portable_sound_set_cue(&audio->mesh_audio.sound_set,
             (uint16_t)(PORTABLE_SOUND_CUE_ENGINE_IDLE + state), &replaced) && replaced;

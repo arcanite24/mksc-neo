@@ -1759,10 +1759,10 @@ void mk64_course_convert(RiCtx *ctx,const Mk64CourseSource *s)
         c.owners[i]=ABSENT;
         if(scrolls[i].course!=s->index)continue;
         RiData list=scrolls[i].address>>24==6?c.data:c.lists;
-        for(size_t at=scrolls[i].address&0xFFFFFFu;;at+=8) {
-            const uint8_t op=*ri_at(ctx,list,at,8);
+        for(size_t command=scrolls[i].address&0xFFFFFFu;;command+=8) {
+            const uint8_t op=*ri_at(ctx,list,command,8);
             if(op==0xB8)ri_fail(ctx,"%s: scrolled list without tile size",where);
-            if(op==0xF2) { c.owners[i]=(scrolls[i].address&0xFF000000u)|(uint32_t)at;break; }
+            if(op==0xF2) { c.owners[i]=(scrolls[i].address&0xFF000000u)|(uint32_t)command;break; }
         }
     }
     /* Every course material samples with the N64's three-point filter and,

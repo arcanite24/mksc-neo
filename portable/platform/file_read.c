@@ -1,4 +1,7 @@
 #include "file_read.h"
+#ifdef PORTABLE_ENABLE_SDL3
+#include <SDL3/SDL_filesystem.h>
+#endif
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -87,7 +90,10 @@ PortableFileReadStatus portable_file_read_bounded(const char *path, size_t maxim
 #ifdef PORTABLE_ENABLE_SDL3
     errno = 0;
     SDL_IOStream *stream = SDL_IOFromFile(path, "rb");
-    if (stream == NULL && strncmp(path, "content://", 10u) != 0 && errno == ENOENT)
+    /* SDL opens through CreateFileW on Windows, which leaves errno unset. */
+    SDL_PathInfo info;
+    if (stream == NULL && strncmp(path, "content://", 10u) != 0 &&
+        (errno == ENOENT || !SDL_GetPathInfo(path, &info)))
         return PORTABLE_FILE_READ_NOT_FOUND;
     return portable_file_read_stream(stream, maximum, bytes, size);
 #else

@@ -283,7 +283,6 @@ static const MapObj *map_object(Course *c, const MkdsObject *object, size_t inde
         if (map_objects[known].id == object->id)
             return &map_objects[known];
     ri_fail(c->m.ctx, "%s: course_map.nkm object %zu has unknown MapObj ID %u", c->m.where, index, (unsigned)object->id);
-    return NULL;
 }
 
 #define GATE_MARGIN (1 << 16)

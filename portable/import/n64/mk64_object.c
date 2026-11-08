@@ -40,7 +40,7 @@ typedef struct Mk64Prop {
 } Mk64Prop;
 
 #define TREE_TLUT 0x0D004C68u /* common_tlut_trees_import */
-static const Mk64Prop props[] = {
+static const Mk64Prop prop_families[] = {
     /* Mario Raceway: trees, piranha plants (frame 0 at 0x03009800, see flipbooks), signs */
     {0,2,-1,0x9570,{0},{0x06006A68},0,TREE_TLUT,1,3,0,0,8,0,0},
     {0,8,-1,0x9518,{0},{0x06006990},0x03009800,0,1,5,0,0,8,0,REACT_SPIN},
@@ -276,7 +276,7 @@ static void draw_triangle(Draw *d,unsigned a,unsigned b,unsigned c)
     row[3]=draw_material(d);
     for (unsigned k=0;k<3;++k) {
         const uint8_t *v=d->vertex[slots[k]/2];
-        for (unsigned c=0;c<4;++c)d->shade[row[3]][c]+=v[12+c];
+        for (unsigned channel=0;channel<4;++channel)d->shade[row[3]][channel]+=v[12+channel];
         ++d->shade[row[3]][4];
     }
     mkds_words(m,MKDS_T_TRIS,row,4);
@@ -1832,9 +1832,9 @@ static void gull_family(Placer *p,const Mk64Gulls *g)
     const uint32_t mesh=armature_loop(p,"seagull",g->skeleton,g->animations,0,FRAME_TICKS,1,NULL);
     Mk64Random random={0x5EA6u+p->index};
     for (uint32_t i=0;i<g->count;++i) {
-        const int16_t *c=g->centre[i<g->count/2?0:1];
-        const int32_t origin[3]={c[0]+(int32_t)random_below(&random,200)-100,c[1]+(int32_t)random_below(&random,20),
-                                 c[2]+(int32_t)random_below(&random,200)-100};
+        const int16_t *centre=g->centre[i<g->count/2u?0:1];
+        const int32_t origin[3]={centre[0]+(int32_t)random_below(&random,200)-100,centre[1]+(int32_t)random_below(&random,20),
+                                 centre[2]+(int32_t)random_below(&random,200)-100};
         Mk64Loop l;memset(&l,0,sizeof l);
         spline_route(course,&l,ctx->rom,g->splines[i%4],origin,NULL,2,NULL,NULL,0);
         const uint32_t route=loop_route(course,&l);
@@ -2512,8 +2512,8 @@ void mk64_objects(MkdsModel *course,const Mk64Segments *segments,uint32_t index,
 {
     RiCtx *ctx=course->ctx;
     uint32_t meshes=0,hazards=0;
-    for (size_t family=0;family<sizeof props/sizeof props[0];++family) {
-        const Mk64Prop *prop=&props[family];
+    for (size_t family=0;family<sizeof prop_families/sizeof prop_families[0];++family) {
+        const Mk64Prop *prop=&prop_families[family];
         if (prop->course!=index)continue;
         if (meshes==256)ri_fail(ctx,"%s: more than 256 scenery meshes",course->where);
         Draw d;memset(&d,0,sizeof d);

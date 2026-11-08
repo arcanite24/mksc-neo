@@ -226,7 +226,7 @@ static PortableMeshStatus tick_without_worlds(PortableMeshTimeTrial *session,
                                               PortableMeshKartEvents *events, char *error,
                                               size_t capacity)
 {
-    PortableMeshRacerTurn turn;
+    PortableMeshRacerTurn turn = {0};
     if (session == NULL || events == NULL)
         return portable_mesh_racer_move(session, input, NULL, error, capacity);
     PortableMeshTimeTrial next = *session;
@@ -457,7 +457,7 @@ tick_with_worlds(PortableMeshTimeTrial *session, PortableMeshItems *world,
             return held;
         }
     }
-    PortableMeshRacerTurn turn;
+    PortableMeshRacerTurn turn = {0};
     int handled = 0;
     if (actors)
     {

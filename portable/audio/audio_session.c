@@ -42,7 +42,6 @@ uint8_t portable_audio_session_song_player(const PortableAssetPackView *pack,
         return player<PORTABLE_AUDIO_PLAYER_COUNT?player:PORTABLE_AUDIO_PLAYER_AUTO;
     }
     if(pack!=NULL && (song_id&PORTABLE_AUDIO_NDS_SONG)){
-        PortableAssetSectionView section;
         PortableNdsSequenceView song;
         return portable_asset_pack_find_section(pack,PORTABLE_ASSET_SECTION_NDS_SEQUENCE,
                    song_id&0x7fffu,&section)==PORTABLE_ASSET_PACK_OK && (section.version==1u||section.version==2u) &&

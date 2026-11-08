@@ -1,3 +1,4 @@
+#undef NDEBUG /* Every check is an assert: keep them in release builds. */
 #include "mod_store.h"
 #include "settings.h"
 #include "file_read.h"

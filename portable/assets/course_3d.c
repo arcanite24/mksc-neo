@@ -9,7 +9,7 @@
 #define TAG(s) PORTABLE_COURSE_3D_TAG((s)[0],(s)[1],(s)[2],(s)[3])
 #define ABSENT PORTABLE_COURSE_3D_ABSENT
 #define POSITION_LIMIT INT32_C(268435456)
-_Static_assert((int)PORTABLE_COURSE_3D_TEXTURE_BUNDLE_KIND == (int)PORTABLE_ASSET_SECTION_COURSE_3D_TEXTURE_BUNDLE, "kind 108");
+_Static_assert(PORTABLE_COURSE_3D_TEXTURE_BUNDLE_KIND == 108 && PORTABLE_ASSET_SECTION_COURSE_3D_TEXTURE_BUNDLE == 108, "kind 108");
 
 typedef struct { const char *name; uint32_t stride, limit; uint8_t required; } TableRule;
 static const TableRule table_rules[] = {

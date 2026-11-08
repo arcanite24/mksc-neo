@@ -374,7 +374,7 @@ static PortableMeshStatus respawn(PortableMeshRacer *s)
 {
     int32_t position[3], forward[3];
     uint32_t checkpoint = s->state.checkpoint;
-    PortableCourse3DRespawn point;
+    PortableCourse3DRespawn point = {0};
     if (s->state.last_respawn != PORTABLE_MESH_ABSENT)
     {
         if (!portable_course_3d_respawn(s->course, s->state.last_respawn, &point))

@@ -14,6 +14,7 @@ def archive(mod):
         for name in ('mod.json', 'main.lua'):
             info = zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             info.external_attr = 0o100644 << 16
+            info.create_system = 3  # Unix on every host, so the archive hash is stable.
             z.writestr(info, (ROOT / 'mods/examples' / mod / name).read_bytes())
     return output.getvalue()
 

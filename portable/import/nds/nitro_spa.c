@@ -45,7 +45,7 @@ NitroSpa nitro_spa(RiCtx *ctx, RiData file, const char *name)
             e->axis[axis] = (int16_t)ri_le16(p + 28 + axis * 2);
             e->gravity[axis] = 0;
         }
-        e->color = ri_le16(p + 34);
+        e->color = (uint16_t)ri_le16(p + 34);
         e->outward_speed = (int32_t)ri_le32(p + 36);
         e->axis_speed = (int32_t)ri_le32(p + 40);
         e->scale = (int32_t)ri_le32(p + 44);
