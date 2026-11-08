@@ -16,12 +16,25 @@ android {
         applicationId = 'io.github.mkscneo'
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = '0.1'
+        versionCode = (project.findProperty('versionCode') ?: '1') as int
+        versionName = project.findProperty('versionName') ?: '0.1'
         externalNativeBuild {
             cmake {
                 arguments "-DMKSC_SDL_SOURCE=${sdlSource}", '-DANDROID_STL=c++_static', '-DPORTABLE_STRICT_WARNINGS=ON'
                 abiFilters 'arm64-v8a'
+            }
+        }
+    }
+    // Release signing: MKSC_KEYSTORE (path), MKSC_KEYSTORE_PASSWORD, MKSC_KEY_ALIAS,
+    // MKSC_KEY_PASSWORD. Without them release APKs are debug-signed.
+    def keystore = System.getenv('MKSC_KEYSTORE')
+    signingConfigs {
+        if (keystore) {
+            release {
+                storeFile = file(keystore)
+                storePassword = System.getenv('MKSC_KEYSTORE_PASSWORD')
+                keyAlias = System.getenv('MKSC_KEY_ALIAS')
+                keyPassword = System.getenv('MKSC_KEY_PASSWORD')
             }
         }
     }
@@ -32,7 +45,7 @@ android {
         }
         release {
             minifyEnabled = false
-            signingConfig = signingConfigs.debug
+            signingConfig = keystore ? signingConfigs.release : signingConfigs.debug
         }
     }
     sourceSets.main.java.srcDirs += "${sdlSource}/android-project/app/src/main/java"

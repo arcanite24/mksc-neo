@@ -1,0 +1,287 @@
+name: Release
+
+# Push a tag like v0.2.0 (or v0.2.0-rc.1 for a prerelease) to build every
+# platform and publish a GitHub release. Run it manually to build the bundles
+# as workflow artifacts without publishing anything.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SDL_VERSION: 3.4.18
+  EMSDK_VERSION: 6.0.12
+  ANDROID_NDK_VERSION: 27.1.12297006
+  CMAKE_LINUX_VERSION: 3.31.6
+
+jobs:
+  version:
+    name: Version and tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      code: ${{ steps.version.outputs.code }}
+      publish: ${{ steps.version.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - id: version
+        name: Derive version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            version="${GITHUB_REF_NAME#v}"
+            if [[ ! "$version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(-[0-9A-Za-z.-]+)?$ ]]; then
+              echo "::error::tag $GITHUB_REF_NAME is not vMAJOR.MINOR.PATCH[-PRERELEASE]"
+              exit 1
+            fi
+            code=$(( BASH_REMATCH[1] * 1000000 + BASH_REMATCH[2] * 1000 + BASH_REMATCH[3] ))
+            publish=true
+          else
+            version="git-${GITHUB_SHA::10}"
+            code=1
+            publish=false
+          fi
+          {
+            echo "version=$version"
+            echo "code=$code"
+            echo "publish=$publish"
+          } >> "$GITHUB_OUTPUT"
+          echo "Version $version (Android versionCode $code, publish=$publish)"
+      - name: Headless tests (ROM-free)
+        run: python3 tools/portable/check.py debug
+
+  macos:
+    name: macOS (universal)
+    needs: version
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/cache@v4
+        id: sdl-cache
+        with:
+          path: ${{ runner.temp }}/sdl
+          key: sdl-${{ env.SDL_VERSION }}-macos-universal-11.0
+      - name: Build SDL
+        if: steps.sdl-cache.outputs.cache-hit != 'true'
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz
+          cmake -S "SDL3-$SDL_VERSION" -B sdl-build -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES='arm64;x86_64' -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 \
+            -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/sdl"
+          cmake --build sdl-build --parallel
+          cmake --install sdl-build
+      - name: Package
+        run: |
+          python3 tools/portable/package_release.py --sdl-prefix "$RUNNER_TEMP/sdl" \
+            --version '${{ needs.version.outputs.version }}' --output dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle-macos
+          path: dist/*.zip
+          if-no-files-found: error
+
+  linux:
+    name: Linux (x86_64)
+    needs: version
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    # Steam Runtime 3 (sniper) SDK: bundles run on glibc 2.31+.
+    container: registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest
+    # Paths stay inside the workspace: runner.temp is a host path in container jobs.
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install CMake
+        run: |
+          curl -fsSL "https://github.com/Kitware/CMake/releases/download/v$CMAKE_LINUX_VERSION/cmake-$CMAKE_LINUX_VERSION-linux-x86_64.tar.gz" | tar xz -C /opt
+          echo "/opt/cmake-$CMAKE_LINUX_VERSION-linux-x86_64/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache@v4
+        id: sdl-cache
+        with:
+          path: .sdl
+          key: sdl-${{ env.SDL_VERSION }}-linux-sniper
+      - name: Build SDL
+        if: steps.sdl-cache.outputs.cache-hit != 'true'
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz
+          cmake -S "SDL3-$SDL_VERSION" -B sdl-build -DCMAKE_BUILD_TYPE=Release \
+            -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/.sdl"
+          cmake --build sdl-build --parallel
+          cmake --install sdl-build
+      - name: Package
+        run: |
+          python3 tools/portable/package_release.py --sdl-prefix .sdl \
+            --version '${{ needs.version.outputs.version }}' --output dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle-linux
+          path: dist/*.tar.gz
+          if-no-files-found: error
+
+  windows:
+    name: Windows (x64)
+    needs: version
+    runs-on: windows-2025
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/cache@v4
+        id: sdl-cache
+        with:
+          path: ${{ runner.temp }}\sdl
+          key: sdl-${{ env.SDL_VERSION }}-windows-x64-mt
+      - name: Download SDL
+        if: steps.sdl-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz
+      - name: Build SDL and package
+        shell: cmd
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+          SDL_CACHED: ${{ steps.sdl-cache.outputs.cache-hit }}
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+          if errorlevel 1 exit /b %errorlevel%
+          set CMAKE_GENERATOR=Ninja
+          if not "%SDL_CACHED%"=="true" (
+            cmake -S "%RUNNER_TEMP%\SDL3-%SDL_VERSION%" -B "%RUNNER_TEMP%\sdl-build" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF -DCMAKE_INSTALL_PREFIX="%RUNNER_TEMP%\sdl" || exit /b 1
+            cmake --build "%RUNNER_TEMP%\sdl-build" --parallel || exit /b 1
+            cmake --install "%RUNNER_TEMP%\sdl-build" || exit /b 1
+          )
+          python tools/portable/package_release.py --sdl-prefix "%RUNNER_TEMP%\sdl" --version "%VERSION%" --output dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle-windows
+          path: dist/*.zip
+          if-no-files-found: error
+
+  web:
+    name: Web (WebAssembly)
+    needs: version
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install Emscripten
+        run: |
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+          "$RUNNER_TEMP/emsdk/emsdk" install "$EMSDK_VERSION"
+          "$RUNNER_TEMP/emsdk/emsdk" activate "$EMSDK_VERSION"
+      - name: Build SDL and the game
+        run: |
+          # shellcheck disable=SC1091
+          source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
+          prefix="$RUNNER_TEMP/sdl"
+          build="$RUNNER_TEMP/web-build"
+          cd "$RUNNER_TEMP"
+          curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz
+          emcmake cmake -S "SDL3-$SDL_VERSION" -B sdl-build -DCMAKE_BUILD_TYPE=Release \
+            -DSDL_SHARED=OFF -DSDL_STATIC=ON -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF \
+            -DCMAKE_INSTALL_PREFIX="$prefix"
+          cmake --build sdl-build --parallel
+          cmake --install sdl-build
+          cd "$GITHUB_WORKSPACE"
+          emcmake cmake -S portable -B "$build" -DCMAKE_BUILD_TYPE=Release -DPORTABLE_BUILD_TESTS=OFF \
+            -DPORTABLE_BUILD_SDL3_APP=ON -DPORTABLE_STRICT_WARNINGS=ON -DSDL3_DIR="$prefix/lib/cmake/SDL3"
+          cmake --build "$build" --parallel 4
+          python3 tools/portable/package_release.py --web-build "$build" --sdl-prefix "$prefix" \
+            --version '${{ needs.version.outputs.version }}' --output dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle-web
+          path: dist/*.zip
+          if-no-files-found: error
+
+  android:
+    name: Android (arm64)
+    needs: version
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install NDK and SDL source
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;$ANDROID_NDK_VERSION" "cmake;3.22.1" "platforms;android-35"
+          curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz -C "$RUNNER_TEMP"
+      - name: Build APK
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          MKSC_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          MKSC_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          MKSC_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          VERSION: ${{ needs.version.outputs.version }}
+          VERSION_CODE: ${{ needs.version.outputs.code }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+            export MKSC_KEYSTORE="$RUNNER_TEMP/release.keystore"
+          else
+            echo "::warning::ANDROID_KEYSTORE_BASE64 is not set; the APK is debug-signed and cannot update over another build"
+          fi
+          python3 tools/portable/android.py --release --sdl-source "$RUNNER_TEMP/SDL3-$SDL_VERSION" \
+            --version-name "$VERSION" --version-code "$VERSION_CODE"
+          mkdir -p dist
+          cp .mksc-tools/portable/check/android/app/outputs/apk/release/app-release.apk \
+            "dist/mksc-neo-$VERSION-android-arm64.apk"
+          rm -f "$RUNNER_TEMP/release.keystore"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle-android
+          path: dist/*.apk
+          if-no-files-found: error
+
+  publish:
+    name: Publish release
+    needs: [version, macos, linux, windows, web, android]
+    if: needs.version.outputs.publish == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bundle-*
+          path: dist
+          merge-multiple: true
+      - name: Checksums
+        run: cd dist && sha256sum -- * > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: |
+          prerelease=()
+          if [[ "$VERSION" == *-* ]]; then prerelease=(--prerelease); fi
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --title "MKSC Neo $VERSION" \
+            --generate-notes --verify-tag "${prerelease[@]}"

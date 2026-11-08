@@ -98,6 +98,8 @@ Ghosts retain the original 4 KiB input-stream budget in every 2D Drift Extras ch
 
 Run `python3 tools/portable/package_release.py --sdl-prefix PREFIX --rom ROM`; archives appear in `.mksc-tools/portable/runs/dist/`. Rescan with `--check ARCHIVE --rom ROM`. Bundles contain the executable, SDL and notices; the content scan rejects game assets and scans ROM fragments/encoded tables. It does not establish licensing of transformed artwork. Imports and saves belong in the data folder.
 
+Releases are built by `.github/workflows/release.yml`. Pushing a tag `vMAJOR.MINOR.PATCH` (or `vX.Y.Z-rc.N`, published as a prerelease) runs the headless tests, builds the macOS, Linux, Windows, web and Android bundles and publishes them with `SHA256SUMS.txt` as a GitHub release. Running the workflow by hand builds the same bundles as workflow artifacts without publishing. Android APKs are signed with the repository secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD`; without them they are debug-signed. Locally, `android.py --release` signs with `MKSC_KEYSTORE`, `MKSC_KEYSTORE_PASSWORD`, `MKSC_KEY_ALIAS` and `MKSC_KEY_PASSWORD` when set.
+
 macOS bundles target 11+ with arm64/x86_64 and ad-hoc signing; Control-click → Open may be needed. Windows bundles use a static CRT, GUI executable and default 1 MiB stack. Linux bundles built with the maintained Sniper SDK target x86_64/glibc 2.31+ and carry SDL beside the executable. Packaging does not publish or notarize. A universal build alone does not prove Intel execution.
 
 ## Other backends

@@ -2,6 +2,7 @@
 """Build the Android APK and optionally install and launch it over adb.
 
   python3 tools/portable/android.py [--release] [--install] [--run] [--device SERIAL]
+                                    [--version-name NAME] [--version-code N]
 
 SDL 3.4.18 source comes from --sdl-source or SDL3_SOURCE_DIR (its
 android-project also provides the Gradle wrapper). Outputs stay under
@@ -27,6 +28,8 @@ def main():
     parser.add_argument('--install', action='store_true', help='install on the adb device')
     parser.add_argument('--run', action='store_true', help='install, launch and follow the game log')
     parser.add_argument('--device', help='adb serial, e.g. 192.168.1.50:5555')
+    parser.add_argument('--version-name', help='APK versionName (default 0.1)')
+    parser.add_argument('--version-code', type=int, help='APK versionCode (default 1)')
     args = parser.parse_args()
 
     sdl = Path(args.sdl_source).resolve()
@@ -38,8 +41,13 @@ def main():
         default_sdk = Path.home() / ('Library/Android/sdk' if sys.platform == 'darwin' else 'Android/Sdk')
         env['ANDROID_HOME'] = str(default_sdk)
     variant = 'Release' if args.release else 'Debug'
+    versions = []
+    if args.version_name:
+        versions.append(f'-PversionName={args.version_name}')
+    if args.version_code:
+        versions.append(f'-PversionCode={args.version_code}')
     subprocess.run([str(gradlew), '-p', str(REPO / 'portable/android'), '--project-cache-dir',
-                    str(SCRATCH / 'gradle'), f'-PsdlSource={sdl}', f'assemble{variant}', '--console=plain'],
+                    str(SCRATCH / 'gradle'), f'-PsdlSource={sdl}', *versions, f'assemble{variant}', '--console=plain'],
                    check=True, env=env)
     apk = SCRATCH / 'app/outputs/apk' / variant.lower() / f'app-{variant.lower()}.apk'
     print(f'apk: {apk}')

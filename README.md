@@ -14,8 +14,10 @@ first start the game asks for your `.gba` file and imports it locally.
 
 ## Playing
 
-Unpack a player bundle, start `MKSC Neo.app`, `./mksc` or `mksc.exe`, and choose
-your ROM. Bundles are made with `tools/portable/package_release.py`; see
+Download the bundle for your platform from
+[Releases](https://github.com/arcanite24/mksc-neo/releases) (macOS, Linux,
+Windows, web or Android), start `MKSC Neo.app`, `./mksc`, `mksc.exe` or the APK,
+and choose your ROM. To make bundles yourself, see
 [docs/BUILDING.md](docs/BUILDING.md).
 
 ## Building
