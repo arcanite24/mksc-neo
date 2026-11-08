@@ -244,6 +244,20 @@ static uint8_t menu_short_transitions(const PortableSettings *settings)
     return (uint8_t)(settings->short_transitions || !settings->classic_menus);
 }
 
+/* In the browser the page sizes the canvas (it fills the tab), so the window
+ * scale and aspect settings do not resize the window there. */
+static int set_shell_window_size(SDL_Window *window, int width, int height)
+{
+#ifdef __EMSCRIPTEN__
+    (void)window;
+    (void)width;
+    (void)height;
+    return 1;
+#else
+    return SDL_SetWindowSize(window, width, height);
+#endif
+}
+
 static int apply_settings_field(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture,
                                 SDL_AudioStream *stream, PortableFrontendFlow *flow,
                                 const PortableSettings *settings, PortableSetting field,
@@ -271,10 +285,10 @@ static int apply_settings_field(SDL_Window *window, SDL_Renderer *renderer, SDL_
     case PORTABLE_SETTING_ASPECT_WIDTH:
         if (settings->aspect_width == 0u)
             return 1;
-        return SDL_SetWindowSize(window, (int)settings->aspect_width * (int)settings->window_scale,
+        return set_shell_window_size(window, (int)settings->aspect_width * (int)settings->window_scale,
                                  160 * (int)settings->window_scale);
     case PORTABLE_SETTING_WINDOW_SCALE:
-        return SDL_SetWindowSize(
+        return set_shell_window_size(
             window,
             (int)portable_software_frame_window_width(renderer, settings->aspect_width) *
                 (int)settings->window_scale,
@@ -3050,7 +3064,7 @@ static int game_shell_setup(GameShell *shell, const PortableSettings *initial,
         /* The loading surface becomes the shell window at the size it would
          * have been created with; automated runs keep their 1x hidden window. */
         const int scale = shell->aid != NULL ? 1 : (int)shell->settings.window_scale;
-        (void)SDL_SetWindowSize(shell->window,
+        (void)set_shell_window_size(shell->window,
             (shell->settings.aspect_width ? shell->settings.aspect_width : 240) * scale, 160 * scale);
         if (shell->aid == NULL)
             (void)SDL_SetWindowFullscreen(shell->window, shell->settings.fullscreen || PORTABLE_WINDOW_ALWAYS_FULLSCREEN);

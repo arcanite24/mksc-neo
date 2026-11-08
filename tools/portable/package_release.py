@@ -69,13 +69,13 @@ LICENSE-NOTICE.md: project notice. LUA-LICENSE.txt: Lua 5.4 (MIT).
 SDL3-LICENSE.txt: SDL 3 (zlib). Not affiliated with Nintendo.
 """
 
-WEB_FILES = ('mksc.html', 'mksc.js', 'mksc.wasm')
+WEB_FILES = ('mksc.html', 'mksc.js', 'mksc.wasm', 'sw.js')
 WEB_README = """MKSC Neo {version} (web / WebAssembly)
 ======================================
 
 This ZIP contains only the game engine and license notices. It contains no ROM,
-asset pack or Nintendo graphics/audio. Supply your own imported game.pack from
-Mario Kart: Super Circuit (USA), SHA-1 {sha1}.
+asset pack or Nintendo graphics/audio. Supply your own Mario Kart: Super Circuit
+(USA) ROM, SHA-1 {sha1}.
 
 Run locally
 -----------
@@ -84,17 +84,15 @@ Extract the ZIP and open a terminal in the extracted folder. Start a local serve
   python3 -m http.server 8000 --bind 127.0.0.1
 
 Open http://127.0.0.1:8000/mksc.html in a WebAssembly-capable browser. Opening the
-HTML directly as a file may block loading JavaScript or WebAssembly.
-Choose your game.pack in the page, then click Play. The pack is read into browser
-memory; it is not included in this download or uploaded by the launcher.
-Use the keyboard controls shown below the game canvas.
+HTML directly as a file may block loading JavaScript or WebAssembly. Any static
+web host serving these files over HTTPS works the same way.
 
-Create game.pack with the desktop engine's first-start importer, or:
+On first start, choose your ROM (.gba, or a .zip containing it). It is imported
+in the page and kept in this browser's storage with your saves, settings,
+records, ghosts and mods; nothing is uploaded. Later visits start with Play,
+and the game keeps working offline once loaded. Clearing the site's data in
+the browser removes everything. Controllers work after pressing a button.
 
-  mksc --import YOUR_OWN_ROM.gba game.pack
-
-Saves, settings, records and ghosts are temporary in this browser session.
-Reloading or closing the page loses them. Reload to choose another pack.
 Stop the local server with Ctrl-C when finished.
 
 Licences

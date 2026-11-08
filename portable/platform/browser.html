@@ -1,65 +1,192 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 <title>MKSC Neo</title>
 <style>
-  :root { color-scheme: dark; font: 16px system-ui; background: #141414; color: #eee; }
-  body { margin: 0; min-height: 100vh; display: grid; place-content: center; text-align: center; }
-  main { max-width: 960px; padding: 16px; }
-  canvas { display: block; width: min(90vw,960px); height: auto; background: #000; image-rendering: pixelated; }
-  button,input { font: inherit; margin: 8px; }
-  #status { min-height: 1.5em; }
+  :root { color-scheme: dark; font: 16px system-ui, sans-serif; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #000; color: #f2f5fa; }
+  /* SDL sizes a resizable window from the canvas's CSS box, so the game fills the page.
+     !important because SDL writes inline sizes when it destroys a window. */
+  #canvas { position: fixed; inset: 0; width: 100vw !important; height: 100vh !important; display: block; background: #000;
+    outline: none; touch-action: none; }
+  #overlay { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; box-sizing: border-box;
+    background: radial-gradient(ellipse at 50% 35%, #12305e 0%, #071226 60%, #000 100%); }
+  #overlay[hidden] { display: none; }
+  .card { width: min(440px, 100%); text-align: center; }
+  h1 { margin: 0 0 4px; font-size: clamp(40px, 9vw, 64px); font-weight: 900; font-style: italic; letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #fff 30%, #9cc8ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tag { margin: 0 0 28px; color: #9fb3cf; font-size: 15px; }
+  .actions { display: grid; gap: 10px; }
+  .btn { display: block; width: 100%; box-sizing: border-box; padding: 14px 18px; border-radius: 12px; border: 0; cursor: pointer;
+    font: 700 18px system-ui, sans-serif; background: rgba(255,255,255,0.1); color: #f2f5fa; transition: transform .08s, background .15s; }
+  .btn:hover { background: rgba(255,255,255,0.16); }
+  .btn.primary { background: linear-gradient(180deg, #ffd34d, #f5a300); color: #2a1a00; }
+  .btn.primary:hover { background: linear-gradient(180deg, #ffe07a, #ffb21f); }
+  .btn:focus-visible { outline: 3px solid #9cc8ff; outline-offset: 3px; }
+  .btn:active { transform: scale(0.98); }
+  #rom { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .note { margin: 14px 0 0; color: #9fb3cf; font-size: 14px; line-height: 1.45; }
+  #status { min-height: 1.4em; margin: 18px 0 0; font-size: 15px; }
+  #status.error { color: #ff9b8f; }
+  .controls { margin-top: 26px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12); color: #7f93b0; font-size: 13px; line-height: 1.6; }
+  kbd { font: 12px ui-monospace, monospace; padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,0.1); color: #c9d6ea; }
 </style>
-<main>
-  <h1>MKSC Neo</h1>
-  <div id="launcher">
-    <p>Choose your imported game.pack to play. Game content stays on your device.</p>
-    <input id="pack" type="file" accept=".pack" aria-label="Game pack">
-    <button id="play" disabled>Play</button>
+<canvas id="canvas" width="720" height="480" tabindex="0" aria-label="Game"></canvas>
+<div id="overlay">
+  <div class="card">
+    <h1>MKSC Neo</h1>
+    <p class="tag">Mario Kart: Super Circuit, rebuilt</p>
+    <div id="returning" class="actions" hidden>
+      <button id="continue" class="btn primary">Play</button>
+      <button id="change" class="btn" type="button">Use a different ROM</button>
+    </div>
+    <div id="first" hidden>
+      <div class="actions">
+        <label for="rom" class="btn primary" id="pick" tabindex="0" role="button">Choose your ROM</label>
+        <input id="rom" type="file" accept=".gba,.agb,.zip">
+      </div>
+      <p class="note">Mario Kart: Super Circuit (USA), as a .gba or a .zip containing it.
+        It is kept in this browser only; nothing is uploaded.</p>
+    </div>
+    <p id="status" role="status">Loading…</p>
+    <div class="controls">
+      Controller: D-pad or stick, <kbd>A</kbd> <kbd>B</kbd> <kbd>Start</kbd><br>
+      Keyboard: arrows · <kbd>Z</kbd> accelerate/confirm · <kbd>X</kbd> brake/back · <kbd>Shift</kbd> hop · <kbd>C</kbd> item · <kbd>Enter</kbd> start<br>
+      Saves, records, ghosts and mods stay in this browser and work offline.
+    </div>
   </div>
-  <p id="status" role="status">Loading game…</p>
-  <canvas id="canvas" width="720" height="480" tabindex="0" aria-label="Game"></canvas>
-  <p>Arrow keys: steer · Z: confirm/accelerate · X: back/brake · Shift: hop · C: item · Enter: Start</p>
-  <p>Saves in this browser session are temporary. Reload to choose another pack.</p>
-</main>
+</div>
 <script>
+  // The data folder SDL_GetPrefPath reports lives in IndexedDB. The ROM is kept
+  // there too; the game pack is rebuilt from it in memory on every launch, so an
+  // updated importer never meets a stale pack.
+  const ROOT = '/libsdl', DATA = '/libsdl/MKSC Neo/Portable', PACK = '/run/game.pack';
+  const ROMS = ['rom.gba', 'rom.zip'];
+  const overlay = document.getElementById('overlay');
   const status = document.getElementById('status');
-  const play = document.getElementById('play');
-  const pack = document.getElementById('pack');
   const canvas = document.getElementById('canvas');
-  let ready = false, busy = false;
+  const say = (text, error) => { status.textContent = text; status.classList.toggle('error', !!error); };
+  const show = id => {
+    for (const name of ['returning', 'first']) document.getElementById(name).hidden = name !== id;
+    const focus = document.querySelector('#' + id + ' .btn');
+    if (focus) focus.focus();
+  };
+  let syncing = false, pending = false, started = false;
+
+  function sync() {
+    if (syncing) { pending = true; return Promise.resolve(); }
+    syncing = true;
+    return new Promise(resolve => Module.FS.syncfs(false, error => {
+      if (error) console.error('Saving to browser storage failed', error);
+      syncing = false;
+      resolve();
+      if (pending) { pending = false; sync(); }
+    }));
+  }
+
+  function storedRom() {
+    for (const name of ROMS) {
+      try { Module.FS.stat(DATA + '/' + name); return DATA + '/' + name; } catch (_) {}
+    }
+    return null;
+  }
+
+  function mkdirs(path) {
+    let at = '';
+    for (const part of path.split('/').filter(Boolean)) {
+      at += '/' + part;
+      try { Module.FS.mkdir(at); } catch (_) {}
+    }
+  }
+
+  function fail(message) {
+    overlay.hidden = false;
+    say('Could not start: ' + message, true);
+  }
+
+  function start(rom) {
+    if (started) return;
+    started = true;
+    document.getElementById('returning').hidden = true;
+    document.getElementById('first').hidden = true;
+    say('Importing your ROM…');
+    // Let the status paint before the synchronous import.
+    setTimeout(() => {
+      try {
+        mkdirs('/run');
+        if (Module.callMain(['--import', rom, PACK])) throw new Error('the ROM could not be imported; see the browser console');
+        overlay.hidden = true;
+        canvas.focus();
+        if (Module.callMain([PACK])) throw new Error('the game could not start; see the browser console');
+        setInterval(sync, 5000);
+      } catch (error) {
+        fail(error.message || error);
+      }
+    }, 30);
+  }
+
   var Module = {
     canvas,
     noInitialRun: true,
-    onRuntimeInitialized() { ready = true; status.textContent = 'Choose a game pack.'; play.disabled = !pack.files.length; },
     print(text) { console.log(text); },
     printErr(text) { console.error(text); },
-    onAbort(text) { status.textContent = 'Game stopped: ' + text; }
-  };
-  pack.addEventListener('change', () => { play.disabled = busy || !ready || !pack.files.length; });
-  play.addEventListener('click', async () => {
-    if (busy || !ready || !pack.files.length) return;
-    busy = true;
-    const selected = pack.files[0];
-    pack.disabled = true;
-    play.disabled = true;
-    status.textContent = 'Opening game pack…';
-    try {
-      Module.FS.writeFile('/game.pack', new Uint8Array(await selected.arrayBuffer()));
-      canvas.focus();
-      const result = Module.callMain(['/game.pack']);
-      if (result) throw new Error('game pack rejected (' + result + '); see browser console');
-      document.getElementById('launcher').hidden = true;
-      status.textContent = '';
-    } catch (error) {
-      status.textContent = 'Could not start: ' + error;
-      busy = false;
-      pack.disabled = false;
-      play.disabled = false;
+    onAbort(text) { fail(text); },
+    onRuntimeInitialized() {
+      const FS = Module.FS;
+      mkdirs(ROOT);
+      FS.mount(FS.filesystems.IDBFS, {}, ROOT);
+      FS.syncfs(true, error => {
+        if (error) console.error('Reading browser storage failed', error);
+        mkdirs(DATA);
+        const rom = storedRom();
+        say('');
+        show(rom ? 'returning' : 'first');
+        pollPad();
+      });
     }
+  };
+
+  // Let a controller drive the launcher: D-pad moves between buttons, A or Start presses.
+  function pollPad() {
+    let held = new Set();
+    (function frame() {
+      if (overlay.hidden || started) return;
+      const now = new Set();
+      for (const pad of navigator.getGamepads ? navigator.getGamepads() : [])
+        if (pad) pad.buttons.forEach((b, i) => { if (b.pressed) now.add(i); });
+      const tapped = i => now.has(i) && !held.has(i);
+      const buttons = [...overlay.querySelectorAll('.btn')].filter(b => b.offsetParent);
+      const at = buttons.indexOf(document.activeElement);
+      if (tapped(12) || tapped(13)) buttons[(Math.max(at, 0) + (tapped(13) ? 1 : buttons.length - 1)) % buttons.length].focus();
+      if ((tapped(0) || tapped(9)) && at >= 0) buttons[at].click();
+      held = now;
+      requestAnimationFrame(frame);
+    })();
+  }
+
+  document.getElementById('continue').addEventListener('click', () => start(storedRom()));
+  document.getElementById('change').addEventListener('click', () => { say(''); show('first'); });
+  document.getElementById('pick').addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); document.getElementById('rom').click(); }
   });
+  document.getElementById('rom').addEventListener('change', async event => {
+    const file = event.target.files[0];
+    if (!file || started) return;
+    const name = file.name.toLowerCase().endsWith('.zip') ? 'rom.zip' : 'rom.gba';
+    say('Saving your ROM in this browser…');
+    for (const old of ROMS) { try { Module.FS.unlink(DATA + '/' + old); } catch (_) {} }
+    Module.FS.writeFile(DATA + '/' + name, new Uint8Array(await file.arrayBuffer()));
+    await sync();
+    start(DATA + '/' + name);
+  });
+  document.addEventListener('visibilitychange', () => { if (document.hidden && started) sync(); });
+  window.addEventListener('pagehide', () => { if (started) sync(); });
   canvas.addEventListener('contextmenu', event => event.preventDefault());
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+  if ('serviceWorker' in navigator && location.protocol !== 'file:')
+    navigator.serviceWorker.register('sw.js').catch(error => console.warn('Offline cache unavailable', error));
 </script>
 {{{ SCRIPT }}}
 </html>

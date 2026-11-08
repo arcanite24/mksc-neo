@@ -273,12 +273,15 @@ if(EMSCRIPTEN)
     if(NOT PORTABLE_BUILD_SDL3_APP)
         message(FATAL_ERROR "The browser build requires the SDL3 application")
     endif()
-    set_target_properties(mksc PROPERTIES SUFFIX ".html")
+    set_target_properties(mksc PROPERTIES SUFFIX ".html"
+        LINK_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/platform/browser.html")
     target_link_options(mksc PRIVATE
         "--shell-file" "${CMAKE_CURRENT_SOURCE_DIR}/platform/browser.html"
         "-sALLOW_MEMORY_GROWTH=1" "-sSTACK_SIZE=1048576"
         "-sEXPORTED_RUNTIME_METHODS=FS,callMain" "-sFORCE_FILESYSTEM=1"
-        "-sINVOKE_RUN=0" "-sEXIT_RUNTIME=0")
+        "-sINVOKE_RUN=0" "-sEXIT_RUNTIME=0" "-lidbfs.js")
+    # Offline cache for the page and engine (see browser.html).
+    configure_file(platform/browser_sw.js "${CMAKE_CURRENT_BINARY_DIR}/sw.js" COPYONLY)
 endif()
 option(PORTABLE_WINDOWS_GUI "Build mksc.exe without a console window (player bundles)" OFF)
 if(WIN32 AND PORTABLE_WINDOWS_GUI)

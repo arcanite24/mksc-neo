@@ -144,7 +144,7 @@ python3 tools/portable/package_release.py --web-build "$build" --sdl-prefix "$pr
 python3 -m http.server 8089 --bind 127.0.0.1 --directory "$build"
 ```
 
-Set `prefix` to the Emscripten SDL install before running. Open localhost and choose your owner-imported pack. The browser uses the same shell iteration and native sessions; filesystem replay/import adapters are optional. The backend boundary is described in [Architecture](ARCHITECTURE.md).
+Set `prefix` to the Emscripten SDL install before running. Open localhost and choose your ROM: the page runs the native importer (`mksc --import`) in memory and then starts the game. The ROM and the data folder (`/libsdl/MKSC Neo/Portable/`: settings, records, ghosts, mods) live in IndexedDB and sync every few seconds and when the page is hidden; the pack is rebuilt from the ROM on each launch. `sw.js` caches the page and engine for offline play (network first, so updates arrive when online). Controllers use the browser Gamepad API through SDL. The browser uses the same shell iteration and native sessions. The backend boundary is described in [Architecture](ARCHITECTURE.md).
 
 ## Automated routes and scratch
 

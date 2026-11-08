@@ -1,0 +1,67 @@
+<img class="banner" src="assets/mksc-neo.png" alt="MKSC Neo" width="600" height="259">
+
+<p class="lead">A native C/SDL3 re-implementation of <strong>Mario Kart: Super Circuit (US)</strong> for macOS,
+Linux, Windows, Android and the web. Optional enhancements: any resolution and aspect ratio, unlocked
+framerate, local split-screen, modern menus, and a modding API for tracks, karts, items, rules and Lua scripts.</p>
+
+<p class="notice">You need your own US ROM (<code>.gba</code>, or a <code>.zip</code> containing it). No game
+content is distributed here: on first start the game imports your ROM locally.</p>
+
+<h2 id="play">Play in the browser</h2>
+<p><a class="button" href="play/mksc.html">Open the web build</a></p>
+<ul>
+  <li>Runs as WebAssembly in current Chrome, Edge, Firefox and Safari.</li>
+  <li>The ROM is imported inside the page and kept in this browser's storage (IndexedDB), with saves,
+    settings, records, ghosts and mods. Nothing is uploaded.</li>
+  <li>Works offline after the first load. Clearing the site's data removes everything.</li>
+  <li>Controllers use the Gamepad API: press a button once so the browser exposes the pad.
+    Keyboard: arrows steer, <kbd>Z</kbd> accelerate/confirm, <kbd>X</kbd> brake/back, <kbd>Shift</kbd> hop,
+    <kbd>C</kbd> item, <kbd>Enter</kbd> start.</li>
+</ul>
+
+<h2 id="downloads">Downloads</h2>
+<div id="downloads-list" data-repo="{{repo}}">
+  <p>Loading the latest release… If this does not load, see <a href="{{repo}}/releases">Releases on GitHub</a>.</p>
+</div>
+<table class="install">
+  <thead><tr><th>Platform</th><th>Install</th></tr></thead>
+  <tbody>
+    <tr><td>macOS</td><td>Universal (Apple Silicon and Intel), macOS 11+. Unzip and move <code>MKSC Neo.app</code>
+      to Applications. The app is not notarized: the first time, Control-click it and choose Open.</td></tr>
+    <tr><td>Linux</td><td>x86-64, glibc 2.31+, X11 or Wayland. Extract and run <code>./mksc</code>.</td></tr>
+    <tr><td>Windows</td><td>x64. Extract and run <code>mksc.exe</code> (keep <code>SDL3.dll</code> next to
+      it). For the unknown-publisher warning: More info, then Run anyway.</td></tr>
+    <tr><td>Android</td><td>arm64, Android 8+. Install the APK (allow installs from your browser or file manager).</td></tr>
+    <tr><td>Web</td><td>The same build as <a href="play/mksc.html">Play</a>, zipped to host yourself. Serve the folder over
+      HTTP(S); opening the HTML file directly does not work.</td></tr>
+  </tbody>
+</table>
+<p>Each release lists <code>SHA256SUMS.txt</code> for verifying downloads. Older versions:
+<a href="{{repo}}/releases">all releases</a>.</p>
+
+<h2 id="docs">Documentation</h2>
+<dl class="docs">
+  <dt><a href="docs/building.html">Building</a></dt>
+  <dd>Toolchains, the <code>check.py</code> test runner, importing a ROM, command-line options, player bundles,
+    and the Android, iOS and web backends.</dd>
+  <dt><a href="docs/modding.html">Modding</a></dt>
+  <dd>Installing and ordering mods, the manifest, the Lua API, data, track and driver mods, mesh courses and 3D models.</dd>
+  <dt><a href="docs/architecture.html">Architecture</a></dt>
+  <dd>Source map, simulation and application flow, rendering and audio, content and persistence, and the 3D course contract.</dd>
+</dl>
+
+<h2 id="source">Source</h2>
+<p>C11 and CMake 3.20+, SDL 3.4, Lua 5.4 for mods. Code at <a href="{{repo}}">{{repo}}</a>.</p>
+<pre><code>git clone {{repo}}.git
+cd mksc-neo
+python3 tools/portable/check.py debug         # build and run the headless tests
+python3 tools/portable/check.py debug --sdl   # also build the SDL game
+.mksc-tools/portable/check/debug-sdl/mksc     # run it</code></pre>
+
+<h2 id="credits">Credits</h2>
+<p>MKSC Neo started from the <a href="https://github.com/aplerdal/mksc">aplerdal/mksc</a> decompilation of
+Mario Kart: Super Circuit. The original game's behavior (physics, collision, AI, items and data formats) was
+recovered from that work and re-implemented as native C. Third-party code and fonts are listed in
+<a href="{{repo}}/blob/main/LICENSE-NOTICE.md">LICENSE-NOTICE.md</a>.</p>
+
+<script src="assets/downloads.js" defer></script>

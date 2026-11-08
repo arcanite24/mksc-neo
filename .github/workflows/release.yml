@@ -184,29 +184,15 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
-      - name: Install Emscripten
+      - uses: ./.github/actions/build-web
+        with:
+          sdl-version: ${{ env.SDL_VERSION }}
+          emsdk-version: ${{ env.EMSDK_VERSION }}
+          build-dir: ${{ runner.temp }}/web-build
+          sdl-prefix: ${{ runner.temp }}/sdl
+      - name: Package
         run: |
-          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
-          "$RUNNER_TEMP/emsdk/emsdk" install "$EMSDK_VERSION"
-          "$RUNNER_TEMP/emsdk/emsdk" activate "$EMSDK_VERSION"
-      - name: Build SDL and the game
-        run: |
-          # shellcheck disable=SC1091
-          source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
-          prefix="$RUNNER_TEMP/sdl"
-          build="$RUNNER_TEMP/web-build"
-          cd "$RUNNER_TEMP"
-          curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz
-          emcmake cmake -S "SDL3-$SDL_VERSION" -B sdl-build -DCMAKE_BUILD_TYPE=Release \
-            -DSDL_SHARED=OFF -DSDL_STATIC=ON -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF \
-            -DCMAKE_INSTALL_PREFIX="$prefix"
-          cmake --build sdl-build --parallel
-          cmake --install sdl-build
-          cd "$GITHUB_WORKSPACE"
-          emcmake cmake -S portable -B "$build" -DCMAKE_BUILD_TYPE=Release -DPORTABLE_BUILD_TESTS=OFF \
-            -DPORTABLE_BUILD_SDL3_APP=ON -DPORTABLE_STRICT_WARNINGS=ON -DSDL3_DIR="$prefix/lib/cmake/SDL3"
-          cmake --build "$build" --parallel 4
-          python3 tools/portable/package_release.py --web-build "$build" --sdl-prefix "$prefix" \
+          python3 tools/portable/package_release.py --web-build "$RUNNER_TEMP/web-build" --sdl-prefix "$RUNNER_TEMP/sdl" \
             --version '${{ needs.version.outputs.version }}' --output dist
       - uses: actions/upload-artifact@v4
         with:

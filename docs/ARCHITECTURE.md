@@ -380,7 +380,7 @@ transparent UI without CPU readback. Missing driver models use exact-manifest so
 four-camera aid exercises one unchanged TT simulation; playable multi-human 3D races belong to T3.
 Cross-host T1 gates cover fixed-point simulation, codecs and full ghosts; frozen CPU raster performance is not a T1 acceptance gate.
 Decoders follow their own failure initialization contracts; invalid settings initialize defaults.
-The browser currently keeps saves for the page session; durable browser storage is not provided.
+The browser keeps the ROM and data folder in IndexedDB (IDBFS mounted at `/libsdl`) and rebuilds the pack in memory on each launch; a service worker caches the engine for offline play.
 
 ## Style and verification
 Use four spaces, descriptive module-prefixed names and named fields. Split functions by coherent operation or ordered phase;

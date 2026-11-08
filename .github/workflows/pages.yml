@@ -1,0 +1,59 @@
+name: Site
+
+# Builds the project site (docs, downloads and the playable web build) and
+# publishes it to GitHub Pages on every push to main.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  SDL_VERSION: 3.4.18
+  EMSDK_VERSION: 6.0.12
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/build-web
+        with:
+          sdl-version: ${{ env.SDL_VERSION }}
+          emsdk-version: ${{ env.EMSDK_VERSION }}
+          build-dir: ${{ runner.temp }}/web-build
+          sdl-prefix: ${{ runner.temp }}/sdl
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build the site
+        run: |
+          python -m pip install markdown==3.7
+          python tools/site/build_site.py --output "$RUNNER_TEMP/site" --web-build "$RUNNER_TEMP/web-build"
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/site
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

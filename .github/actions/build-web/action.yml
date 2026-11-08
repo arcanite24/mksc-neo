@@ -1,0 +1,46 @@
+name: Build the web game
+description: Build SDL and the WebAssembly game with Emscripten. Used by the release and site workflows.
+
+inputs:
+  sdl-version:
+    description: SDL 3 release to build
+    required: true
+  emsdk-version:
+    description: Emscripten SDK version
+    required: true
+  build-dir:
+    description: Where to build the game (mksc.html, mksc.js, mksc.wasm, sw.js end up here)
+    required: true
+  sdl-prefix:
+    description: Where to install SDL
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install Emscripten
+      shell: bash
+      run: |
+        git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+        "$RUNNER_TEMP/emsdk/emsdk" install "${{ inputs.emsdk-version }}"
+        "$RUNNER_TEMP/emsdk/emsdk" activate "${{ inputs.emsdk-version }}"
+    - name: Build SDL and the game
+      shell: bash
+      env:
+        SDL_VERSION: ${{ inputs.sdl-version }}
+        PREFIX: ${{ inputs.sdl-prefix }}
+        BUILD: ${{ inputs.build-dir }}
+      run: |
+        # shellcheck disable=SC1091
+        source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
+        cd "$RUNNER_TEMP"
+        curl -fsSL "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz" | tar xz
+        emcmake cmake -S "SDL3-$SDL_VERSION" -B sdl-build -DCMAKE_BUILD_TYPE=Release \
+          -DSDL_SHARED=OFF -DSDL_STATIC=ON -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF \
+          -DCMAKE_INSTALL_PREFIX="$PREFIX"
+        cmake --build sdl-build --parallel
+        cmake --install sdl-build
+        cd "$GITHUB_WORKSPACE"
+        emcmake cmake -S portable -B "$BUILD" -DCMAKE_BUILD_TYPE=Release -DPORTABLE_BUILD_TESTS=OFF \
+          -DPORTABLE_BUILD_SDL3_APP=ON -DPORTABLE_STRICT_WARNINGS=ON -DSDL3_DIR="$PREFIX/lib/cmake/SDL3"
+        cmake --build "$BUILD" --parallel 4
